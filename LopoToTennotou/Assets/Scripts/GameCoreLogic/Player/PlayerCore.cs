@@ -12,7 +12,7 @@ namespace GameCore
         [SerializeField]
         float addSecondArmPower = 0.0f;
 
-        ReactiveProperty<PlayerStateType> currentState = new ReactiveProperty<PlayerStateType>(PlayerStateType.Stop);
+        ReactiveProperty<PlayerStateType> currentState = new ReactiveProperty<PlayerStateType>(PlayerStateType.Run);
         Subject<Vector2> currentDistanceSubject = new Subject<Vector2>();
         ReactiveProperty<float> currentRightArmPower = new ReactiveProperty<float>(0.0f);
         ReactiveProperty<float> currentLeftArmPower = new ReactiveProperty<float>(0.0f);
