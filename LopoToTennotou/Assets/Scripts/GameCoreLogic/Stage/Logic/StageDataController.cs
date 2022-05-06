@@ -6,17 +6,17 @@ using UniRx;
 
 namespace GameCore
 {
-    public class StageDataController : MonoBehaviour
+    public class StageDataController : MonoBehaviour, IStageInitializable
     {
         Direction[,] currentMoveGimmickData = null;
-        SquareGoalGimmickType[,] currentGoalGimmickData = null;
+        Direction[,] currentGoalGimmickData = null;
         SpuareOptionFlag[,] currentOtherGimmickData = null;
         StageDataUpdateLogicDef logicDef = new StageDataUpdateLogicDef();
-        Subject<StageDataUpdateResultData> updateResultChangeSubject = new Subject<StageDataUpdateResultData>();
+        Subject<StageDataUpdateResultData> UpdateResultChangeSubject = new Subject<StageDataUpdateResultData>();
 
-        public IObservable<StageDataUpdateResultData> updateResultChangeObserbable => updateResultChangeSubject;
+        public IObservable<StageDataUpdateResultData> UpdateResultChangeObserbable => UpdateResultChangeSubject;
 
-        public void StageDataRegister(Direction[,] moveGimmickData, SquareGoalGimmickType[,] goalGimmickData, SpuareOptionFlag[,] otherGimmickData)
+        public void StageDataRegister(Direction[,] moveGimmickData, Direction[,] goalGimmickData, SpuareOptionFlag[,] otherGimmickData)
         {
             currentMoveGimmickData = moveGimmickData;
             currentGoalGimmickData = goalGimmickData;
@@ -38,7 +38,7 @@ namespace GameCore
                 ref currentOtherGimmickData,
                 stageDataUpdateData,
                 out StageDataUpdateResultData resultData);
-            updateResultChangeSubject.OnNext(resultData);
+            UpdateResultChangeSubject.OnNext(resultData);
         }
     }
 }
