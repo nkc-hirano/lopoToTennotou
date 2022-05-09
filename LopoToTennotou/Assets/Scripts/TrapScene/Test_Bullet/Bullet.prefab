@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movePowerX: 0
-  movePowerZ: -150
+  movePowerZ: 2000
 --- !u!54 &-7303979761670797288
 Rigidbody:
   m_ObjectHideFlags: 0

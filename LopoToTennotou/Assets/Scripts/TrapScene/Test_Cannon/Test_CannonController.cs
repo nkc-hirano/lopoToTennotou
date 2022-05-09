@@ -11,6 +11,8 @@ namespace Test_Trap.Cannon
         GameObject bullet;      // 弾オブジェクト
         [SerializeField]
         int spanTime;           // 生成速度
+        [SerializeField]
+        int bulletSpeed = 2000; //
 
         bool stopFlg;           // 動作停止フラグ
 
@@ -31,10 +33,20 @@ namespace Test_Trap.Cannon
             }
         }
 
-        void CreateBullet() 
+        void CreateBullet()
         {
+            float rotX = gameObject.transform.eulerAngles.y;
+            Vector2 plusPos = Vector2.zero;
+            if (rotX == 270) plusPos.x = 1;
+            else if (rotX == 180) plusPos.y = -1;
+            else if (rotX == 90) plusPos.x = -1;
+            else plusPos.y = 1;
             // 球を生成し、子オブジェクトにする
-            Instantiate(bullet, gameObject.transform);
+
+            GameObject myBullet = Instantiate(bullet);
+            myBullet.transform.position = gameObject.transform.position;
+            Debug.Log(gameObject.transform.eulerAngles + " " + plusPos);
+            myBullet.GetComponent<Bullet.BulletController>().Shoot(new Vector3(bulletSpeed * plusPos.x, 0, bulletSpeed * plusPos.y));
         }
 
         private void OnDestroy()
