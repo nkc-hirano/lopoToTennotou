@@ -28,8 +28,8 @@ namespace Test_Trap.Cannon
         {
             while (!stopFlg) 
             {
-                shotEventHandler();
                 yield return new WaitForSeconds(spanTime);
+                shotEventHandler();
             }
         }
 

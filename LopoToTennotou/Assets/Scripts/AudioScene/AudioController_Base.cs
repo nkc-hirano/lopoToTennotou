@@ -44,7 +44,8 @@ public class AudioController_Base : MonoBehaviour
         if (audioSource.time == 0 && !onFlg) { onFlg = true; audioSource.Play(); }
         else if (audioSource.time == 0 && onFlg && audioSource.loop) { onFlg = false; audioSource.Play(); }
         // Ä¶ŠÔ‚ªw’è‚³‚ê‚Ä‚¢‚éê‡Ac‚èŠÔ‚ª0‚É‚È‚Á‚½‚ç’â~
-        if (playbackTime != 0 && LimitTime() == 0) AudioStop();
+        //if (playbackTime != 0 && LimitTime() == 0) AudioStop();
+        if (playbackTime != 0 && LimitTime(playbackTime) == 0) AudioStop();
     }
     public void AudioStop()
     {

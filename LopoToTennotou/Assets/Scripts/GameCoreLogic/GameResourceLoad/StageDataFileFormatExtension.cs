@@ -9,11 +9,11 @@ namespace GameCore
     {
         public static void GetParallelData(this StageDataFileFormat fileFormat,
             out Direction[,] moveGimmickDirections,
-            out Direction[,] goalGimmickDirections,
+            out Direction[,] buttonGimmickDirections,
             out SpuareOptionFlag[,] spuareOptionFlags)
         {
             moveGimmickDirections = new Direction[fileFormat.xLength, fileFormat.yLength];
-            goalGimmickDirections = new Direction[fileFormat.xLength, fileFormat.yLength];
+            buttonGimmickDirections = new Direction[fileFormat.xLength, fileFormat.yLength];
             spuareOptionFlags = new SpuareOptionFlag[fileFormat.xLength, fileFormat.yLength];
 
             for (int i = 0; i < fileFormat.xLength; i++)
@@ -22,7 +22,7 @@ namespace GameCore
                 {
                     var refNum = i * 15 + j;
                     moveGimmickDirections[i, j] = fileFormat.moveGimmickDirections[refNum];
-                    goalGimmickDirections[i,j] = fileFormat.goalGimmickDirections[refNum];
+                    buttonGimmickDirections[i,j] = fileFormat.buttonGimmickDirections[refNum];
                     spuareOptionFlags[i,j] = fileFormat.spuareOptionFlags[refNum];
                 }
             }

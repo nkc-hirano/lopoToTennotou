@@ -29,13 +29,13 @@ public class AudioControllerTest : MonoBehaviour
     void Start()
     {
         source = gameObject.AddComponent<AudioSource>();
-        source = audioController.SetSource(source, (int)soundNum);
-        //    source = audioController.SetSource(source,(int)soundNum,group,loopFlg);
+        //source = audioController.SetSource(source, (int)soundNum);
+        source = audioController.SetSource(source,(int)soundNum,group,loopFlg);
     }
     void Update()
     {
-        audioController.AudioPlay();
-        //    audioController.AudioPlay(playbackTime,crossFade,data,speed);
+        //audioController.AudioPlay();
+        audioController.AudioPlay(playbackTime,crossFade,data,speed);
         if (Input.GetKeyDown(KeyCode.Return))
             audioController.AudioStop();
     }

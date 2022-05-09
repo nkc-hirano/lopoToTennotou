@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace GameCore
 {
     public enum SpuareOptionFlag
@@ -12,10 +8,10 @@ namespace GameCore
         Start = 4,
         Goal = 8,
         Indestructible = 16,
-        // 32
-        // 64
-        // 128
-        // 256
+        CannonTrapUp = 32,
+        CannonTrapDown = 64,
+        CannonTrapLeft = 128,
+        CannonTrapRight = 256,
         WallUp = 512,
         WallDown = 1024,
         WallLeft = 2048,
