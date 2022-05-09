@@ -9,8 +9,6 @@ namespace GameCore
     public class StageInstantiater : StageDataLoaderBase
     {
         [SerializeField]
-        GameObject[] gimmickObj;
-        [SerializeField]
         NameStageObjPair[] objPairs;
         [SerializeField]
         string stdData;
@@ -21,12 +19,6 @@ namespace GameCore
 
         void Start()
         {
-            // StageDataFileFormatを取得
-            // ↓登録
-            // initializer.StageDataRegister();
-            // 生成 メソッドにしておく
-            // ※後で変数名は変更する！！
-
             // ファイルを読み込みテキスト変換
             TextAsset txtData = (TextAsset)Resources.Load(stdData);
             // jsonファイルとして変換してStageDataFileFormat型に変換
@@ -41,6 +33,7 @@ namespace GameCore
             // オブジェクトの生成
             CreateObject(jsonData);
         }
+
         void CreateObject(StageDataFileFormat data)
         {
             for (int i = 0; i < data.xLength; i++)
@@ -49,162 +42,154 @@ namespace GameCore
                 {
                     if (!moveGimmickData[i, j].HasFlag(Direction.Zero))
                     {
-                        MoveGimmickCreate(data, i, j);
+                        MoveGimmickCreate(i, j);
                     }
                     else if (!buttonGimmickData[i, j].HasFlag(Direction.Zero))
                     {
-                        ButtonGimmickCreate(data, i, j);
+                        ButtonGimmickCreate(i, j);
                     }
                     else if (otherGimmickData[i, j] != 0)
                     {
-                        SpuareOptionCreate(data, i, j);
+                        SpuareOptionCreate(i, j);
                     }
                 }
             }
         }
-        void MoveGimmickCreate(StageDataFileFormat data, int i, int j)
+
+        void MoveGimmickCreate(int i, int j)
         {
             Vector3 dir = Vector3.zero;
-            GameObject gimmckObj = Instantiate(gimmickObj[(int)GimmickNumber.MoveObj]);
-            if (moveGimmickData[i, j].HasFlag(Direction.Up)) dir = Vector3.zero;
-            else if (moveGimmickData[i, j].HasFlag(Direction.Down)) dir = new Vector3(0, 180);
-            else if (moveGimmickData[i, j].HasFlag(Direction.Right)) dir = new Vector3(0, 90);
-            else if (moveGimmickData[i, j].HasFlag(Direction.Left)) dir = new Vector3(0, -90);
-            else Debug.Log(otherGimmickData[i, j]);
-            gimmckObj.transform.eulerAngles = dir;
-            gimmckObj.transform.localPosition = new Vector3(j, 0, -i);
+            GimmickObjNumber number = GimmickObjNumber.MoveObj;
+            if (moveGimmickData[i, j].HasFlag(Direction.Up)) { dir = Vector3.zero; }
+            else if (moveGimmickData[i, j].HasFlag(Direction.Down)) { dir = new Vector3(0, 180); }
+            else if (moveGimmickData[i, j].HasFlag(Direction.Right)) { dir = new Vector3(0, 90); }
+            else if (moveGimmickData[i, j].HasFlag(Direction.Left)) { dir = new Vector3(0, -90); }
+            GimmickCreate(number, dir, i, j);
         }
-        void ButtonGimmickCreate(StageDataFileFormat data, int i, int j)
+        void ButtonGimmickCreate(int i, int j)
         {
             Vector3 dir = Vector3.zero;
-            GameObject gimmckObj ;
+            GimmickObjNumber number = GimmickObjNumber.ButtonObj;
+            // 中心ボタン
             if (buttonGimmickData[i, j].HasFlag(Direction.Up) &&
                 buttonGimmickData[i, j].HasFlag(Direction.Down) &&
                 buttonGimmickData[i, j].HasFlag(Direction.Right) &&
                 buttonGimmickData[i, j].HasFlag(Direction.Left))
             {
-                gimmckObj = Instantiate(gimmickObj[(int)GimmickNumber.ButtonObj2]);
+                number = GimmickObjNumber.ButtonObj2;
                 dir = Vector3.zero;
             }
+            // 矢印ボタン
             else if (buttonGimmickData[i, j].HasFlag(Direction.Up))
             {
-                gimmckObj = Instantiate(gimmickObj[(int)GimmickNumber.ButtonObj]);
                 dir = Vector3.zero;
             }
             else if (buttonGimmickData[i, j].HasFlag(Direction.Down))
             {
-                gimmckObj = Instantiate(gimmickObj[(int)GimmickNumber.ButtonObj]);
                 dir = new Vector3(0, 180);
             }
             else if (buttonGimmickData[i, j].HasFlag(Direction.Right))
             {
-                gimmckObj = Instantiate(gimmickObj[(int)GimmickNumber.ButtonObj]);
                 dir = new Vector3(0, 90);
             }
             else if (buttonGimmickData[i, j].HasFlag(Direction.Left))
             {
-                gimmckObj = Instantiate(gimmickObj[(int)GimmickNumber.ButtonObj]);
                 dir = new Vector3(0, -90);
             }
-            else gimmckObj = null;
-            gimmckObj.transform.eulerAngles = dir;
-            gimmckObj.transform.localPosition = new Vector3(j, 0, -i);
+            GimmickCreate(number, dir, i, j);
         }
-        void SpuareOptionCreate(StageDataFileFormat data, int i, int j)
+        void SpuareOptionCreate(int i, int j)
         {
             Vector3 dir = Vector3.zero;
-            GimmickNumber number = new GimmickNumber();
-            GameObject gimmckObj;
-            if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.Start)) number = GimmickNumber.Start;
-            else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.Goal)) number = GimmickNumber.Goal;
-            else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.Indestructible)) number = GimmickNumber.Indestructible;
+            GimmickObjNumber number = GimmickObjNumber.Start;
+            
+            // スタート
+            if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.Start)) { number = GimmickObjNumber.Start; }
+            // ゴール
+            else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.Goal)) { number = GimmickObjNumber.Goal; }
+            // 行き止まり
+            else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.Indestructible)) { number = GimmickObjNumber.Indestructible; }
+            
+            // 壁
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.WallUp))
             {
-                number = GimmickNumber.Wall;
-                dir = Vector3.zero;
+                number = GimmickObjNumber.Wall;
+                //dir = Vector3.zero;
+                dir = new Vector3(0, -90);
             }
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.WallDown))
             {
-                number = GimmickNumber.Wall;
-                dir = new Vector3(0, 180);
+                number = GimmickObjNumber.Wall;
+                //dir = new Vector3(0, 180);
+                dir = new Vector3(0, 90);
             }
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.WallLeft))
             {
-                number = GimmickNumber.Wall;
-                dir = new Vector3(0, 90);
+                number = GimmickObjNumber.Wall;
+                //dir = new Vector3(0, 90);
+                dir = new Vector3(0, 180);
             }
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.WallRight))
             {
-                number = GimmickNumber.Wall;
-                dir = new Vector3(0, -90);
+                number = GimmickObjNumber.Wall;
+                //dir = new Vector3(0, -90);
+                dir = Vector3.zero;
             }
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.WallLeftUp))
             {
-                number = GimmickNumber.WallSide;
+                number = GimmickObjNumber.WallSide;
                 dir = Vector3.zero;
             }
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.WallRightDown))
             {
-                number = GimmickNumber.WallSide;
+                number = GimmickObjNumber.WallSide;
                 dir = new Vector3(0, 180);
             }
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.WallRightUp))
             {
-                number = GimmickNumber.WallSide;
+                number = GimmickObjNumber.WallSide;
                 dir = new Vector3(0, 90);
             }
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.WallLeftDown))
             {
-                number = GimmickNumber.WallSide;
+                number = GimmickObjNumber.WallSide;
                 dir = new Vector3(0, -90);
             }
+
+            // 大砲
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.CannonTrapUp))
             {
-                number = GimmickNumber.CannonTrapObj;
+                number = GimmickObjNumber.CannonTrapObj;
                 dir = Vector3.zero;
             }
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.CannonTrapDown))
             {
-                number = GimmickNumber.CannonTrapObj;
+                number = GimmickObjNumber.CannonTrapObj;
                 dir = new Vector3(0, 180);
             }
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.CannonTrapLeft))
             {
-                number = GimmickNumber.CannonTrapObj;
+                number = GimmickObjNumber.CannonTrapObj;
                 dir = new Vector3(0, -90);
             }
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.CannonTrapRight))
             {
-                number = GimmickNumber.CannonTrapObj;
+                number = GimmickObjNumber.CannonTrapObj;
                 dir = new Vector3(0, 90);
             }
-            else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.PitTrap)) number = GimmickNumber.PitTrap;
-            else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.Dark)) number = GimmickNumber.Dark;
-            else Debug.Log(otherGimmickData[i, j]);
-            gimmckObj = Instantiate(gimmickObj[(int)number]);
+            // 落とし穴
+            else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.PitTrap)) { number = GimmickObjNumber.PitTrap; }
+            // 暗闇
+            else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.Dark)) { number = GimmickObjNumber.Dark; }
+            // 生成
+            GimmickCreate(number, dir, i, j);
+        }
+
+        void GimmickCreate(GimmickObjNumber nuber, Vector3 dir, int i, int j)
+        {
+            GameObject gimmckObj = Instantiate(objPairs[(int)nuber].obj);
             gimmckObj.transform.eulerAngles = dir;
             gimmckObj.transform.localPosition = new Vector3(j, 0, -i);
         }
-    }
-    enum GimmickNumber
-    {
-        Start,
-        Goal,
-        Indestructible,
-        Wall,
-        WallSide,
-        MoveObj,
-        ButtonObj,
-        ButtonObj2,
-        PitTrap,
-        Dark,
-        CannonTrapObj,
-    }
-
-    [System.Serializable]
-    struct NameStageObjPair
-    {
-        public string name;
-        public GameObject obj;
     }
 }
