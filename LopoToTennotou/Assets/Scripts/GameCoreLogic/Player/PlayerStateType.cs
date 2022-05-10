@@ -9,6 +9,7 @@ namespace GameCore
         Stay,
         Run,
         Action,
+        Fall,
         Stop,
     }
 }
