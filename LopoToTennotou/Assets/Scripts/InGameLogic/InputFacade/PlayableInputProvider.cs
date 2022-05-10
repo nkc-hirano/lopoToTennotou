@@ -33,7 +33,8 @@ namespace GameCore
 
             gamepadEnableObservable.Subscribe(current =>
             {
-
+                Vector2 distance = current.leftStick.ReadValue();
+                core.PositionUpdate(distance);
             });
 
             keyboardEnableObservable.Subscribe(current =>
@@ -52,6 +53,11 @@ namespace GameCore
                 // ‚à‚Ì‰Ÿ‚·ƒAƒNƒVƒ‡ƒ“
                 if (current.zKey.isPressed) { core.ArmLeftPowerAdd(); }
                 if (current.xKey.isPressed) { core.ArmRightPowerAdd(); }
+
+                if (!current.zKey.isPressed && !current.xKey.isPressed)
+                {
+                    core.ArmPowerReset();
+                }
             });
         }
     }

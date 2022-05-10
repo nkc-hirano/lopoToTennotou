@@ -14,18 +14,18 @@ namespace GameCore
         [SerializeField]
         PlayerStateType initState = PlayerStateType.Stop;
 
-        ReactiveProperty<PlayerStateType> currentState = new ReactiveProperty<PlayerStateType>(PlayerStateType.Stop);
+        ReactiveProperty<PlayerStateType> currentState = new ReactiveProperty<PlayerStateType>(PlayerStateType.Run);
         Subject<Vector2> currentDistanceSubject = new Subject<Vector2>();
         ReactiveProperty<float> currentRightArmPower = new ReactiveProperty<float>(0.0f);
         ReactiveProperty<float> currentLeftArmPower = new ReactiveProperty<float>(0.0f);
 
-        public IReadOnlyReactiveProperty<PlayerStateType> readOnlyCurrentState 
+        public IReadOnlyReactiveProperty<PlayerStateType> readOnlyCurrentState
             => currentState;
         public IObservable<Vector2> CurrentDistanceObservable
             => currentDistanceSubject;
-        public IReadOnlyReactiveProperty<float> readOnlyCurrentRightArmPower 
+        public IReadOnlyReactiveProperty<float> readOnlyCurrentRightArmPower
             => currentRightArmPower;
-        public IReadOnlyReactiveProperty<float> readOnlyCurrentLeftArmPower 
+        public IReadOnlyReactiveProperty<float> readOnlyCurrentLeftArmPower
             => currentLeftArmPower;
 
         private void Start()
@@ -57,6 +57,12 @@ namespace GameCore
             if (currentState.Value == PlayerStateType.Action) { return; }
             if (currentState.Value == PlayerStateType.Stop) { return; }
             currentDistanceSubject.OnNext(distance);
+        }
+
+        public void PlayerStateUpdate(PlayerStateType stateType)
+        {
+            if (stateType == PlayerStateType.Stop) { return; }
+            currentState.Value = stateType;
         }
     }
 }
