@@ -6,6 +6,7 @@ namespace SceneController
     public struct SceneStateUpdateProcessDef
     {
         private static readonly string logicSceneName = "LogicScene";
+        private static readonly string fadeSceneName = "FadeScene";
         private static readonly string titleSceneName = "TitleScene";
         private static readonly string introductionSceneName = "IntroductionScene";
         private static readonly string tutorialSceneName = "TutorialScene";
@@ -15,6 +16,7 @@ namespace SceneController
         public void InitStateStartProcess()
         {
             SceneManager.LoadSceneAsync(logicSceneName, LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync(fadeSceneName, LoadSceneMode.Additive);
         }
 
         public void TitleStateStartProcess(int id = 0)

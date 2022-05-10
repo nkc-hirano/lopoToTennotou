@@ -6,7 +6,7 @@ using UnityEngine.AddressableAssets;
 
 namespace GameCore
 {
-    public class StageInstantiater : StageDataLoaderBase
+    public class StageInstantiater : MonoBehaviour
     {
         void Start()
         {
