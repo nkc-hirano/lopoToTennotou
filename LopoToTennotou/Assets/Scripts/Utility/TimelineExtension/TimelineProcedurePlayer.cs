@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -11,6 +11,9 @@ public class TimelineProcedurePlayer : MonoBehaviour
     List<TimlineInfo> timlineInfos = new List<TimlineInfo>();
     private bool isCurrentTimelineAdvance = false;
     private int currentProgress = 0;
+
+    public int MaxProgress => timlineInfos.Count;
+    public event Action timeLineFinishEventHandler;
 
     void Awake()
     {
@@ -28,6 +31,7 @@ public class TimelineProcedurePlayer : MonoBehaviour
         if (isTimelineFinish)
         {
             TimelineStop();
+            if (timeLineFinishEventHandler != null) { timeLineFinishEventHandler(); }
             currentProgress++;
             TimelineStart();
         }
