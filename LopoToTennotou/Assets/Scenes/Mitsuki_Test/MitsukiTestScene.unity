@@ -263,7 +263,7 @@ MonoBehaviour:
   - name: MoveObj
     obj: {fileID: 4515304748876909190, guid: f4ae858d9be0e85438d16ebcf7ff8f18, type: 3}
   - name: ButtonObj
-    obj: {fileID: 2888167025565103705, guid: 37ff9a4821bbb054c869f73089c0b119, type: 3}
+    obj: {fileID: 6905696312732308149, guid: 37ff9a4821bbb054c869f73089c0b119, type: 3}
   - name: ButtonObj2
     obj: {fileID: 721809429087854706, guid: 21b706e9cc8298e4492ee00fe0b5aed1, type: 3}
   - name: PitTrap
@@ -271,7 +271,7 @@ MonoBehaviour:
   - name: Dark
     obj: {fileID: 6034018910567639136, guid: cc6f4df00f2712a46aca02d01db57204, type: 3}
   - name: CannonTrapObj
-    obj: {fileID: 8164209869053202085, guid: f5a4ddbda857d594f81da1d388cc6a36, type: 3}
+    obj: {fileID: 6393636911637356335, guid: a0f220702cdec8b42b8c7f6785be2208, type: 3}
   stdData: MitukiTest2
 --- !u!1 &2133619491
 GameObject:

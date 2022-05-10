@@ -60,10 +60,10 @@ namespace GameCore
         {
             Vector3 dir = Vector3.zero;
             GimmickObjNumber number = GimmickObjNumber.MoveObj;
-            if (moveGimmickData[i, j].HasFlag(Direction.Up)) { dir = Vector3.zero; }
-            else if (moveGimmickData[i, j].HasFlag(Direction.Down)) { dir = new Vector3(0, 180); }
-            else if (moveGimmickData[i, j].HasFlag(Direction.Right)) { dir = new Vector3(0, 90); }
-            else if (moveGimmickData[i, j].HasFlag(Direction.Left)) { dir = new Vector3(0, -90); }
+            if (moveGimmickData[i, j].HasFlag(Direction.Up)) { dir = new Vector3(0, 180); }
+            else if (moveGimmickData[i, j].HasFlag(Direction.Down)) { dir = Vector3.zero; }
+            else if (moveGimmickData[i, j].HasFlag(Direction.Right)) { dir = new Vector3(0, -90); }
+            else if (moveGimmickData[i, j].HasFlag(Direction.Left)) { dir = new Vector3(0, 90); }
             GimmickCreate(number, dir, i, j);
         }
         void ButtonGimmickCreate(int i, int j)
@@ -82,19 +82,19 @@ namespace GameCore
             // –îˆóƒ{ƒ^ƒ“
             else if (buttonGimmickData[i, j].HasFlag(Direction.Up))
             {
-                dir = Vector3.zero;
+                dir = new Vector3(0, 180);
             }
             else if (buttonGimmickData[i, j].HasFlag(Direction.Down))
             {
-                dir = new Vector3(0, 180);
+                dir = Vector3.zero;
             }
             else if (buttonGimmickData[i, j].HasFlag(Direction.Right))
             {
-                dir = new Vector3(0, 90);
+                dir = new Vector3(0, -90);
             }
             else if (buttonGimmickData[i, j].HasFlag(Direction.Left))
             {
-                dir = new Vector3(0, -90);
+                dir = new Vector3(0, 90);
             }
             GimmickCreate(number, dir, i, j);
         }
