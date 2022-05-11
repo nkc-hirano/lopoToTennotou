@@ -7,7 +7,7 @@ namespace GameCore
 {
     public class StageDataLoaderBase : MonoBehaviour
     {
-        [Inject]
+        //[Inject]
         protected IStageInitializable initializer;
     }
 }

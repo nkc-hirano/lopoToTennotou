@@ -49,12 +49,12 @@ namespace GameCore
 
         public override int GetHashCode()
         {
-            return moveGimmickDirections.GetHashCode() * goalGimmickDirections.GetHashCode() * spuareOptionFlags.GetHashCode();
+            return moveGimmickDirections.GetHashCode() * buttonGimmickDirections.GetHashCode() * spuareOptionFlags.GetHashCode();
         }
 
         public override string ToString()
         {
-            return $"xLength:{xLength},yLength:{yLength},moveGimmickDirections:{moveGimmickDirections},goalGimmickDirections:{goalGimmickDirections},spuareOptionFlags:{spuareOptionFlags}";
+            return $"xLength:{xLength},yLength:{yLength},moveGimmickDirections:{moveGimmickDirections},goalGimmickDirections:{buttonGimmickDirections},spuareOptionFlags:{spuareOptionFlags}";
         }
     }
 }

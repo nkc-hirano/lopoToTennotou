@@ -6,7 +6,7 @@ using UnityEngine.AddressableAssets;
 
 namespace GameCore
 {
-    public class StageInstantiater : MonoBehaviour
+    public class StageInstantiater : StageDataLoaderBase
     {
         [SerializeField]
         NameStageObjPair[] objPairs;
@@ -19,6 +19,11 @@ namespace GameCore
 
         void Start()
         {
+           
+        }
+
+        public void StageCreate()
+        {
             // ファイルを読み込みテキスト変換
             TextAsset txtData = (TextAsset)Resources.Load(stdData);
             // jsonファイルとして変換してStageDataFileFormat型に変換
@@ -29,7 +34,7 @@ namespace GameCore
             // オブジェクトの位置情報を登録?
             initializer = gameObject.AddComponent<StageDataController>();
             initializer.StageDataRegister(moveGimmickData, buttonGimmickData, otherGimmickData);
-           
+
             // オブジェクトの生成
             CreateObject(jsonData);
         }
