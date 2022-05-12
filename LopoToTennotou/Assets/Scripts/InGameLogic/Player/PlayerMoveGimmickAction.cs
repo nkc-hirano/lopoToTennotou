@@ -7,6 +7,7 @@ namespace GameCore
 {
     public class PlayerMoveGimmickAction : MonoBehaviour
     {
+        IGimmickMovable movablegimmick = null;
         PlayerCore core = null;
         float rightChargeMaxPower = 0.0f;
         float leftChargeMaxPower = 0.0f;
@@ -54,24 +55,28 @@ namespace GameCore
             // 押し始め -> まえのフレームで0.0fで今のフレームで0.0fじゃない
             // 押し終わり -> まえのフレームで0.0fではなく今のフレームで0.0f
             // MaxPower ->　押し終わりの前のフレームの数字
-            
+
             // X押し始め
             bool isPushStart = beforeRightPower <= 0.0f && pushRightPower != 0.0f;
             // X押し終わり
             bool isPushFinish = beforeRightPower != 0.0f && pushRightPower <= 0.0f;
             // 走る、落ちるアニメーション以外
-            bool isAnimationOverwrite = core.readOnlyCurrentState.Value != PlayerStateType.Run && core.readOnlyCurrentState.Value != PlayerStateType.Fall;
+            bool isAnimationOverride = core.readOnlyCurrentState.Value != PlayerStateType.Run && core.readOnlyCurrentState.Value != PlayerStateType.Fall;
 
-            if (isPushStart && isAnimationOverwrite)
+            if (isPushStart && isAnimationOverride)
             {
                 // 押しているアニメーション
                 core.PlayerStateUpdate(PlayerStateType.Action);
+                movablegimmick ??= GetInterface();
             }
-            else if(isPushFinish)
+            else if (isPushFinish)
             {
                 // 前の最大の力を設定する
                 rightChargeMaxPower = beforeRightPower;
+                // nullだったらスキップ
+                movablegimmick?.AddPower(Direction.Down, 0, 0);
                 core.PlayerStateUpdate(PlayerStateType.Stay);
+                movablegimmick = null;
             }
 
             beforeRightPower = pushRightPower;
@@ -90,16 +95,34 @@ namespace GameCore
             {
                 // 押しているアニメーション
                 core.PlayerStateUpdate(PlayerStateType.Action);
+                movablegimmick ??= GetInterface();
             }
             // 離したとき
             else if (isPushFinish)
             {
                 // 前の最大の力を設定する
                 leftChargeMaxPower = beforeLeftPower;
+                // nullだったらスキップ
+                movablegimmick?.AddPower(Direction.Down, 0, 0);
                 core.PlayerStateUpdate(PlayerStateType.Stay);
+                movablegimmick = null;
             }
 
             beforeLeftPower = pushLeftPower;
+        }
+
+        private IGimmickMovable GetInterface()
+        {
+            const float RAY_DISTANCE = 3.0f;
+            Ray ray = new Ray(transform.position, transform.forward * RAY_DISTANCE);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (hit.collider.gameObject.TryGetComponent(out IGimmickMovable gimmickMovable))
+                {
+                    return gimmickMovable;
+                }
+            }
+            return null;
         }
     }
 }

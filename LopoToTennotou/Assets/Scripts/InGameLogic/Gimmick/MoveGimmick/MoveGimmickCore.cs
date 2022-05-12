@@ -22,12 +22,12 @@ namespace GameCore
             controller.UpdateResultChangeObserbable.Subscribe(StageUpdateDataReceive);
         }
 
-        void CoordUpdate(byte x, byte y)
+        private void CoordUpdate(byte x, byte y)
         {
             coordProperty.Value = (x, y);
         }
 
-        void DirUpdate(Direction dir)
+        private void DirUpdate(Direction dir)
         {
             dirProperty.Value = dir;
         }
