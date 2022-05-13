@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &341206586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 341206587}
+  - component: {fileID: 341206588}
+  m_Layer: 0
+  m_Name: IStageInitializable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &341206587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341206586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2105771254}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &341206588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341206586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb3530db933a7742b96338b6f6e140a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageInitializableComponentObject: {fileID: 782325471}
 --- !u!1 &782325471
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +209,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625516fdac217a24ca85835069855c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objPairs:
+  - name: Start
+    obj: {fileID: 8749137874857926427, guid: ae0d7a154231c8745ae89c795eeeebe9, type: 3}
+  - name: Goal
+    obj: {fileID: 8453127875455227039, guid: f6ab1ca2a5125e44e947eaccf0061723, type: 3}
+  - name: Indestructible
+    obj: {fileID: 8447303808924542785, guid: 995c2b90d85e86341898775468bb867f, type: 3}
+  - name: Wall
+    obj: {fileID: 8309935154450073439, guid: c38f4996a73ff4a4eacf26698a383c57, type: 3}
+  - name: WallSide
+    obj: {fileID: 346953299380355074, guid: 6d82b0479619c664fa93a38ce98a5fc2, type: 3}
+  - name: MoveObj
+    obj: {fileID: 4515304748876909190, guid: f4ae858d9be0e85438d16ebcf7ff8f18, type: 3}
+  - name: ButtonObj
+    obj: {fileID: 6905696312732308149, guid: 37ff9a4821bbb054c869f73089c0b119, type: 3}
+  - name: ButtonObj2
+    obj: {fileID: 721809429087854706, guid: 21b706e9cc8298e4492ee00fe0b5aed1, type: 3}
+  - name: PitTrap
+    obj: {fileID: 3812898693964678384, guid: 0dcf5486682f96442a022b3862ceb6ea, type: 3}
+  - name: Dark
+    obj: {fileID: 6034018910567639136, guid: cc6f4df00f2712a46aca02d01db57204, type: 3}
+  - name: CannonTrapObj
+    obj: {fileID: 6393636911637356335, guid: a0f220702cdec8b42b8c7f6785be2208, type: 3}
+  stdData: MitukiTest2
 --- !u!4 &782325474
 Transform:
   m_ObjectHideFlags: 0
@@ -209,7 +277,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 341206588}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -237,7 +306,39 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2105771254}
   m_Father: {fileID: 0}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2105771253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2105771254}
+  m_Layer: 0
+  m_Name: Installer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2105771254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105771253}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 341206587}
+  m_Father: {fileID: 1645743265}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

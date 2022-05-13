@@ -7,7 +7,7 @@ namespace GameCore
     public struct StageDataUpdateLogicDef
     {
         public void StageDataCalculation(ref Direction[,] stageData,
-            ref Direction[,] goalGimmickData,
+            ref Direction[,] buttonGimmickData,
             ref SpuareOptionFlag[,] otherGimmickData,
             in StageDataUpdateData inUpdateData,
             out StageDataUpdateResultData resultData)

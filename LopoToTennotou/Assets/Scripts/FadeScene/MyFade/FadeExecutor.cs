@@ -15,7 +15,7 @@ public class FadeExecutor : MonoBehaviour
     Color fadeImageColor = new Color();
 
     bool isFadeExcuteTiming = false;
-    bool isFadeAlpha = true;
+    bool isFadeAlpha = false;
 
     float currentTime = 0.0f;
 
@@ -32,6 +32,15 @@ public class FadeExecutor : MonoBehaviour
     {
         instance ??= this;
         fadeImageColor = fadeImage.color;
+    }
+
+    /// <summary>
+    /// •K‚¸ˆê“x‚¾‚¯ŒÄ‚Ô
+    /// </summary>
+    /// <param name="second"></param>
+    internal static void FadeInInitialize(float second)
+    {
+        FadeIn(second, null, instance.FadeInSource.Token).Forget();
     }
 
     // Debug
@@ -64,7 +73,7 @@ public class FadeExecutor : MonoBehaviour
         instance.isFadeExcuteTiming = false;
         instance.isFadeAlpha = true;
         instance.currentTime = 0.0f;
-        if (finishAct != null) { finishAct(); }
+        finishAct?.Invoke();
     }
 
     async internal static UniTask FadeOut(float executeSecondTime, Action finishAct = null, CancellationToken cancellationToken = default)
@@ -88,7 +97,7 @@ public class FadeExecutor : MonoBehaviour
         instance.isFadeExcuteTiming = false;
         instance.isFadeAlpha = false;
         instance.currentTime = 0.0f;
-        if (finishAct != null) { finishAct(); }
+        finishAct?.Invoke();
     }
 
     internal void FadeAlphaChange(bool isFadeAlpha)

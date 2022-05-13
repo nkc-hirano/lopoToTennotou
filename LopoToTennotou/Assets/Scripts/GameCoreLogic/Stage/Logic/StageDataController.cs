@@ -9,7 +9,7 @@ namespace GameCore
     public class StageDataController : MonoBehaviour, IStageInitializable
     {
         Direction[,] currentMoveGimmickData = null;
-        Direction[,] currentGoalGimmickData = null;
+        Direction[,] currentButtonGimmickData = null;
         SpuareOptionFlag[,] currentOtherGimmickData = null;
         StageDataUpdateLogicDef logicDef = new StageDataUpdateLogicDef();
         Subject<StageDataUpdateResultData> UpdateResultChangeSubject = new Subject<StageDataUpdateResultData>();
@@ -19,14 +19,14 @@ namespace GameCore
         public void StageDataRegister(Direction[,] moveGimmickData, Direction[,] goalGimmickData, SpuareOptionFlag[,] otherGimmickData)
         {
             currentMoveGimmickData = moveGimmickData;
-            currentGoalGimmickData = goalGimmickData;
+            currentButtonGimmickData = goalGimmickData;
             currentOtherGimmickData = otherGimmickData;
         }
 
         public void StageDataClear()
         {
             currentMoveGimmickData = null;
-            currentGoalGimmickData = null;
+            currentButtonGimmickData = null;
             currentOtherGimmickData = null;
         }
 
@@ -34,7 +34,7 @@ namespace GameCore
         {
             if (currentMoveGimmickData == null) { return; }
             logicDef.StageDataCalculation(ref currentMoveGimmickData,
-                ref currentGoalGimmickData,
+                ref currentButtonGimmickData,
                 ref currentOtherGimmickData,
                 stageDataUpdateData,
                 out StageDataUpdateResultData resultData);
