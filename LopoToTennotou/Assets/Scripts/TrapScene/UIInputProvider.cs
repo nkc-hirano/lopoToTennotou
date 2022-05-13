@@ -14,7 +14,10 @@ public class UIInputProvider : MonoBehaviour
     // 決定
     private Subject<Unit> decisionButtonSubject = new Subject<Unit>();
     public IObservable<Unit> DecisionButtonObservable => decisionButtonSubject;
-    
+
+    private Subject<Unit> decisionButtonReleaseSubject = new Subject<Unit>();
+    public IObservable<Unit> DecisionButtonReleaseObservable => decisionButtonReleaseSubject;
+
     // キャンセル
     private Subject<Unit> cancelButtonSubject = new Subject<Unit>();
     public IObservable<Unit> CancelButtonObservable => cancelButtonSubject;
@@ -26,10 +29,10 @@ public class UIInputProvider : MonoBehaviour
     // セレクト
     private Subject<Unit> selectButtonSubject = new Subject<Unit>();
     public IObservable<Unit> SelectButtonObservable => selectButtonSubject;
-    
+
     // 十字
     private ReactiveProperty<Vector2> crossMovementProperty = new ReactiveProperty<Vector2>();
-    public IReadOnlyReactiveProperty<Vector2> crossMovementObservable => crossMovementProperty; 
+    public IReadOnlyReactiveProperty<Vector2> crossMovementObservable => crossMovementProperty;
 
     private void Start()
     {
@@ -46,7 +49,7 @@ public class UIInputProvider : MonoBehaviour
 
         gamepadEnableObservable.Subscribe(current => { });
 
-        keyboardEnableObservable.Subscribe(current => 
+        keyboardEnableObservable.Subscribe(current =>
         {
             // 決定
             if (current.enterKey.wasPressedThisFrame)
@@ -54,11 +57,17 @@ public class UIInputProvider : MonoBehaviour
                 Debug.Log("決定");
                 decisionButtonSubject.OnNext(Unit.Default);
             }
+            // 決定長押し
+            if (current.enterKey.wasReleasedThisFrame)
+            {
+                Debug.Log("決定離す");
+                decisionButtonReleaseSubject.OnNext(Unit.Default);
+            }
             // キャンセル
             if (current.backspaceKey.wasPressedThisFrame)
             {
                 Debug.Log("キャンセル");
-                cancelButtonSubject.OnNext(Unit.Default); 
+                cancelButtonSubject.OnNext(Unit.Default);
             }
             // スタート
             if (current.tabKey.wasPressedThisFrame)
@@ -78,17 +87,17 @@ public class UIInputProvider : MonoBehaviour
             if (current.upArrowKey.wasPressedThisFrame)
             {
                 Debug.Log("上");
-                crossMovement += Vector2.up; 
+                crossMovement += Vector2.up;
             }
             if (current.downArrowKey.wasPressedThisFrame)
             {
-                Debug.Log("下"); 
-                crossMovement += Vector2.down; 
+                Debug.Log("下");
+                crossMovement += Vector2.down;
             }
             if (current.leftArrowKey.wasPressedThisFrame)
             {
                 Debug.Log("左");
-                crossMovement += Vector2.left; 
+                crossMovement += Vector2.left;
             }
             if (current.rightArrowKey.wasPressedThisFrame)
             {
