@@ -34,18 +34,20 @@ public class IntroductionAnimation : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        timeline.Play();
+        timeline.Play(); // アニメーションを再生
         introductionSceneStateUpdater = GetComponent<IntroductionSceneStateUpdater>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (turnAnimationTime * currentpageNum <= timeline.time)
+        // ページ数ごとにタイムラインを一時停止
+        if (timeline.time >= turnAnimationTime * currentpageNum )
         {
-            timeline.Pause();
-            isPause = true;
+            timeline.Pause(); // 一時停止する
+            isPause = true;   // 一時停止中
         }
+        // ページ数が
         if (InputSpace() && pageNum >= currentpageNum)
         {
             if (isPause)
@@ -75,10 +77,13 @@ public class IntroductionAnimation : MonoBehaviour
             }
         }
 
+        // タイムラインが最後まで再生されたら
         if(timeline.time + 0.1f >= timeline.duration)
         {
-            timeline.Stop();
-            timeline.time = 0;
+            timeline.Stop();   // タイムラインを止める
+            timeline.time = 0.0f; // タイムライン初期化
+
+            // 次のシーンへ
             introductionSceneStateUpdater.LoadNextScene();
         }
     }
