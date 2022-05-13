@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 379812949}
   - component: {fileID: 379812951}
   m_Layer: 0
-  m_Name: IntroductionAnimation
+  m_Name: IntroductionTimeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -393,7 +393,7 @@ PlayableDirector:
   m_GameObject: {fileID: 379812947}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 4539ba0b782faca489accc3aa2135760, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 115f2b689a127f643b4701e1d015b9ae, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -402,6 +402,8 @@ PlayableDirector:
   - key: {fileID: 0}
     value: {fileID: 0}
   - key: {fileID: 5346284172070171763, guid: 4539ba0b782faca489accc3aa2135760, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5346284172070171763, guid: 115f2b689a127f643b4701e1d015b9ae, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References: []

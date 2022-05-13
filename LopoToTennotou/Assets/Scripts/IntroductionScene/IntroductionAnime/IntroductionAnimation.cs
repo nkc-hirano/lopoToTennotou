@@ -47,14 +47,16 @@ public class IntroductionAnimation : MonoBehaviour
             timeline.Pause(); // 一時停止する
             isPause = true;   // 一時停止中
         }
-        // ページ数が
+        // ページ数が最後のページまで到達してないとき
+        // キーを押したとき
         if (InputSpace() && pageNum >= currentpageNum)
         {
+            // 一時停止しているとき
             if (isPause)
             {
-                timeline.Play();
-                isPause = false;
-                currentpageNum += 1;
+                timeline.Play();     // タイムラインを再生
+                isPause = false;     // 一時停止解除
+                currentpageNum += 1; // 次のページへ
             }
             else
             {
@@ -63,16 +65,19 @@ public class IntroductionAnimation : MonoBehaviour
         }
         else
         {
-            if(LongInputSpace())
+            if(LongInputSpace()) // キー長押し
             {
+                // キーを長押ししている時間
                 inputTime += Time.deltaTime;
             }
             else
             {
+                // キーを離したら時間を0にする
                 inputTime = 0.0f;
             }
             if(inputSkipTime <= inputTime)
             {
+                // 次のシーンへ
                 introductionSceneStateUpdater.LoadNextScene();
             }
         }
