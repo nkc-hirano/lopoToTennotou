@@ -9,6 +9,7 @@ namespace GameCore
 {
     public class CoreStateController : MonoBehaviour
     {
+        CoreStateUpdateProcessDef processes = new CoreStateUpdateProcessDef();
         Subject<CoreStateType> coreStateTypeUpdateSubject = new Subject<CoreStateType>();
 
         public IObserver<CoreStateType> CoreStateTypeUpdateObserver => coreStateTypeUpdateSubject;
@@ -26,16 +27,22 @@ namespace GameCore
                     case CoreStateType.None:
                         break;
                     case CoreStateType.Init:
+                        processes.CoreGameInitStartProcess();
                         break;
                     case CoreStateType.Tutorial:
+                        processes.GameTutorialStartProcess();
                         break;
                     case CoreStateType.Start:
+                        processes.GameStartProcess();
                         break;
                     case CoreStateType.GamePlay:
+                        processes.GamePlayStartProcess();
                         break;
                     case CoreStateType.Goal:
+                        processes.GameGoalProcess();
                         break;
                     case CoreStateType.Final:
+                        processes.CoreGameFinalStartProcess();
                         break;
                     default:
                         break;
