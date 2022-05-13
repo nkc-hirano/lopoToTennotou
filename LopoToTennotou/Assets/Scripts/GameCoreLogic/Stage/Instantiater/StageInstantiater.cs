@@ -19,7 +19,7 @@ namespace GameCore
 
         void Start()
         {
-            StageCreate();
+            //StageCreate();
         }
 
         public void StageCreate()

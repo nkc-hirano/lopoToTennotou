@@ -16,6 +16,7 @@ public class FadeExecutor : MonoBehaviour
 
     bool isFadeExcuteTiming = false;
     bool isFadeAlpha = false;
+    bool isAnimationUse = false;
 
     float currentTime = 0.0f;
 
@@ -26,6 +27,11 @@ public class FadeExecutor : MonoBehaviour
     internal CancellationTokenSource FadeOutSource => fadeOutSource;
     internal bool IsFadeAlpha => isFadeAlpha;
     internal bool IsFadeExcuteTiming => isFadeExcuteTiming;
+    internal static bool IsAnimationUse
+    {
+        get => instance.isAnimationUse;
+        set => instance.isAnimationUse = value;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +47,13 @@ public class FadeExecutor : MonoBehaviour
     internal static void FadeInInitialize(float second)
     {
         FadeIn(second, null, instance.FadeInSource.Token).Forget();
+    }
+
+    private void Update()
+    {
+        if (IsFadeAlpha) { return; }
+        if (!isAnimationUse) { return; }
+        // アニメーションの処理
     }
 
     // Debug
