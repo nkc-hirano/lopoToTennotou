@@ -27,6 +27,8 @@ namespace GameCore
                         break;
                     case CoreStateType.Init:
                         break;
+                    case CoreStateType.Tutorial:
+                        break;
                     case CoreStateType.Start:
                         break;
                     case CoreStateType.GamePlay:

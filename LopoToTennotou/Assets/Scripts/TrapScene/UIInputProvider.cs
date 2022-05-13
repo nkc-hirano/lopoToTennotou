@@ -1,9 +1,9 @@
 using UniRx;
-using UnityEngine;
-using System.Collections.Generic;
 using System;
+using UnityEngine;
 using UniRx.Triggers;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class UIInputProvider : MonoBehaviour
 {

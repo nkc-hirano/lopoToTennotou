@@ -8,6 +8,7 @@ namespace GameCore
     {
         None,
         Init,
+        Tutorial,
         Start,
         GamePlay,
         Goal,
