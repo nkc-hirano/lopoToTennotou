@@ -9,7 +9,7 @@ namespace TitleScene
         void Start()
         {
             TryGetComponent(out FadeFaçade façade);
-            façade.Initialize(0.5f);
+            façade.Initialize(2.5f);
         }
     }
 
