@@ -17,6 +17,8 @@ namespace GameCore
         Direction[,] buttonGimmickData = null;
         SpuareOptionFlag[,] otherGimmickData = null;
 
+        GameObject gimmckObjMother;
+
         void Start()
         {
             //StageCreate();
@@ -41,27 +43,28 @@ namespace GameCore
 
         void CreateObject(StageDataFileFormat data)
         {
+            gimmckObjMother = new GameObject("Root");
             for (int i = 0; i < data.xLength; i++)
             {
                 for (int j = 0; j < data.yLength; j++)
                 {
                     if (!moveGimmickData[i, j].HasFlag(Direction.Zero))
                     {
-                        MoveGimmickCreate(i, j);
+                        MoveGimmickCreate(i, j, data);
                     }
                     else if (!buttonGimmickData[i, j].HasFlag(Direction.Zero))
                     {
-                        ButtonGimmickCreate(i, j);
+                        ButtonGimmickCreate(i, j, data);
                     }
                     else if (otherGimmickData[i, j] != 0)
                     {
-                        SpuareOptionCreate(i, j);
+                        SpuareOptionCreate(i, j, data);
                     }
                 }
             }
         }
 
-        void MoveGimmickCreate(int i, int j)
+        void MoveGimmickCreate(int i, int j, StageDataFileFormat data)
         {
             Vector3 dir = Vector3.zero;
             GimmickObjNumber number = GimmickObjNumber.MoveObj;
@@ -69,9 +72,9 @@ namespace GameCore
             else if (moveGimmickData[i, j].HasFlag(Direction.Down)) { dir = Vector3.zero; }
             else if (moveGimmickData[i, j].HasFlag(Direction.Right)) { dir = new Vector3(0, -90); }
             else if (moveGimmickData[i, j].HasFlag(Direction.Left)) { dir = new Vector3(0, 90); }
-            GimmickCreate(number, dir, i, j);
+            GimmickCreate(number, dir, i, j, data);
         }
-        void ButtonGimmickCreate(int i, int j)
+        void ButtonGimmickCreate(int i, int j,StageDataFileFormat data)
         {
             Vector3 dir = Vector3.zero;
             GimmickObjNumber number = GimmickObjNumber.ButtonObj;
@@ -101,9 +104,9 @@ namespace GameCore
             {
                 dir = new Vector3(0, 90);
             }
-            GimmickCreate(number, dir, i, j);
+            GimmickCreate(number, dir, i, j, data);
         }
-        void SpuareOptionCreate(int i, int j)
+        void SpuareOptionCreate(int i, int j, StageDataFileFormat data)
         {
             Vector3 dir = Vector3.zero;
             GimmickObjNumber number = GimmickObjNumber.Start;
@@ -187,14 +190,17 @@ namespace GameCore
             // ˆÃˆÅ
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.Dark)) { number = GimmickObjNumber.Dark; }
             // ¶¬
-            GimmickCreate(number, dir, i, j);
+            GimmickCreate(number, dir, i, j,data);
         }
 
-        void GimmickCreate(GimmickObjNumber nuber, Vector3 dir, int i, int j)
+        void GimmickCreate(GimmickObjNumber nuber, Vector3 dir, int i, int j, StageDataFileFormat data)
         {
+
+            float offset = (data.xLength - 1) / 2;
             GameObject gimmckObj = Instantiate(objPairs[(int)nuber].obj);
             gimmckObj.transform.eulerAngles = dir;
-            gimmckObj.transform.localPosition = new Vector3(j, 0, -i);
+            gimmckObj.transform.localPosition = new Vector3(j- offset, 0, -i+ offset);
+            gimmckObj.transform.parent = gimmckObjMother.transform;
         }
     }
 }

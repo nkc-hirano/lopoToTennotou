@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using SceneController;
+using UniRx;
 
 public class TitleAnimation : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class TitleAnimation : MonoBehaviour
     };
     TitleStatus titleStatus;
 
+    UIInputProvider uiInputProvider;
     TitleSceneStateUpdater titleSceneStateUpdater;
 
     [SerializeField]
@@ -21,7 +23,10 @@ public class TitleAnimation : MonoBehaviour
     [SerializeField]
     PlayableDirector titleTimeline;
 
-    private double skipTime;
+    double skipTime;
+
+    // エンターキーが押されたか
+    bool isRetunKeyDown = false;
 
     private void Start()
     {
@@ -31,6 +36,13 @@ public class TitleAnimation : MonoBehaviour
         beforeTitleTimeline.Play();
 
         titleSceneStateUpdater = GetComponent<TitleSceneStateUpdater>();
+        uiInputProvider = GetComponent<UIInputProvider>();
+
+        uiInputProvider.DecisionButtonObservable
+            .Subscribe(unit =>
+            {
+                isRetunKeyDown = true;
+            });
     }
 
     // Update is called once per frame
@@ -47,7 +59,7 @@ public class TitleAnimation : MonoBehaviour
             default:
                 break;
         }
-
+        
         // タイトル画面前のアニメーション
         // タイムラインが最後まで再生されたとき　0.1は1を超えるための補正用の値
         bool isTitleIn = beforeTitleTimeline.time + 0.1f >= beforeTitleTimeline.duration;
@@ -67,10 +79,11 @@ public class TitleAnimation : MonoBehaviour
         skipTime = beforeTitleTimeline.duration - beforeTitleTimeline.time;
 
         // スキップできるかどうか
-        if (InputSpace())
+        if (isRetunKeyDown == true)
         {
-            // 現在のタイムに残りのタイムを加算する
+            //現在のタイムに残りのタイムを加算する
             beforeTitleTimeline.time = beforeTitleTimeline.time + skipTime;
+            isRetunKeyDown = false;
         }
     }
 
@@ -85,15 +98,10 @@ public class TitleAnimation : MonoBehaviour
             titleTimeline.Play();   // タイムライン再生
         }
 
-        if(InputSpace())
+        if (isRetunKeyDown == true)
         {
             titleSceneStateUpdater.LoadNextScene();
+            isRetunKeyDown = false;
         }
-    }
-
-    // デバッグ用キー
-    bool InputSpace()
-    {
-        return Input.GetKeyDown(KeyCode.Space);
     }
 }
