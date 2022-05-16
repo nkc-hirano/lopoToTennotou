@@ -170,7 +170,7 @@ MonoBehaviour:
   audioController: {fileID: 1985276868}
   group: {fileID: 24300002, guid: ab4f7735195abaa47abeac15b2a6afb7, type: 2}
   loopFlg: 1
-  playbackTime: 2
+  playbackTime: 5
   crossFade: 0
   speed: 2
 --- !u!1 &1723403848

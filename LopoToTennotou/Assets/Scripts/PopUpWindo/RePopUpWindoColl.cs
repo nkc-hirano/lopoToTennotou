@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 
 public class RePopUpWindoColl : IDisposable
 {
-    public float FadeTime => PopUpObjctLogic.inatance.FadeTime;
+    public float FadeTime => PopUpWindoLogic.inatance.FadeTime;
     public RePopUpWindoColl(GameObject popUpObj)
     {
         Time.timeScale = 0; // í‚é~
