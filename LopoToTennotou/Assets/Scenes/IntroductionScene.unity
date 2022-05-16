@@ -423,7 +423,7 @@ MonoBehaviour:
   "fadeFa\xE7ade": {fileID: 791905355}
   timeline: {fileID: 379812948}
   pageNum: 4
-  turnAnimationTime: 4
+  turnAnimationTime: 3
   inputSkipTime: 2
 --- !u!4 &379812950
 Transform:
