@@ -215,7 +215,7 @@ MonoBehaviour:
       m_Calls: []
   _parentNewObjectsUnderSceneContext: 0
   _contractNames:
-  - p1
+  - SceneController
   _parentContractNames: []
 --- !u!4 &256139728
 Transform:

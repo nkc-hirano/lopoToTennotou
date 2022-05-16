@@ -9,6 +9,15 @@ namespace GameCore
     public class StageInstantiater : StageDataLoaderBase
     {
         [SerializeField]
+        StageAssetScriptableObject stageAsset;
+        [SerializeField, Tooltip("0はtutorial")]
+        List<string> stageDataFileNameList = new List<string>();
+        [SerializeField]
+        string rootObjSetSceneName;
+        [SerializeField]
+        string rootObjSetSceneNameForTutorial;
+
+        [SerializeField]
         NameStageObjPair[] objPairs;
         [SerializeField]
         string stdData;
@@ -24,10 +33,15 @@ namespace GameCore
             //StageCreate();
         }
 
-        public void StageCreate()
+        public void StageCreate(int stageNum)
         {
+            if (stageDataFileNameList.Count < stageNum)
+            {
+                Debug.Log($"無効なエラー");
+                return;
+            }
             // ファイルを読み込みテキスト変換
-            TextAsset txtData = (TextAsset)Resources.Load(stdData);
+            TextAsset txtData = (TextAsset)Resources.Load(stageDataFileNameList[stageNum]);
             // jsonファイルとして変換してStageDataFileFormat型に変換
             var jsonData = JsonUtility.FromJson<StageDataFileFormat>(txtData.text);
             // オブジェクトの位置情報を取得
@@ -74,7 +88,7 @@ namespace GameCore
             else if (moveGimmickData[i, j].HasFlag(Direction.Left)) { dir = new Vector3(0, 90); }
             GimmickCreate(number, dir, i, j, data);
         }
-        void ButtonGimmickCreate(int i, int j,StageDataFileFormat data)
+        void ButtonGimmickCreate(int i, int j, StageDataFileFormat data)
         {
             Vector3 dir = Vector3.zero;
             GimmickObjNumber number = GimmickObjNumber.ButtonObj;
@@ -110,14 +124,14 @@ namespace GameCore
         {
             Vector3 dir = Vector3.zero;
             GimmickObjNumber number = GimmickObjNumber.Start;
-            
+
             // スタート
             if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.Start)) { number = GimmickObjNumber.Start; }
             // ゴール
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.Goal)) { number = GimmickObjNumber.Goal; }
             // 行き止まり
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.Indestructible)) { number = GimmickObjNumber.Indestructible; }
-            
+
             // 壁
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.WallUp))
             {
@@ -190,7 +204,7 @@ namespace GameCore
             // 暗闇
             else if (otherGimmickData[i, j].HasFlag(SpuareOptionFlag.Dark)) { number = GimmickObjNumber.Dark; }
             // 生成
-            GimmickCreate(number, dir, i, j,data);
+            GimmickCreate(number, dir, i, j, data);
         }
 
         void GimmickCreate(GimmickObjNumber nuber, Vector3 dir, int i, int j, StageDataFileFormat data)
@@ -199,7 +213,7 @@ namespace GameCore
             float offset = (data.xLength - 1) / 2;
             GameObject gimmckObj = Instantiate(objPairs[(int)nuber].obj);
             gimmckObj.transform.eulerAngles = dir;
-            gimmckObj.transform.localPosition = new Vector3(j- offset, 0, -i+ offset);
+            gimmckObj.transform.localPosition = new Vector3(j - offset, 0, -i + offset);
             gimmckObj.transform.parent = gimmckObjMother.transform;
         }
     }

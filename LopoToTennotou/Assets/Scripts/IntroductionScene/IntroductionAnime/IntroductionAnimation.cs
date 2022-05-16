@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -8,41 +8,44 @@ using UniRx;
 public class IntroductionAnimation : MonoBehaviour
 {
     [SerializeField]
-    PlayableDirector timeline; // ƒ^ƒCƒ€ƒ‰ƒCƒ“‚Ìæ“¾
+    FadeFaÃ§ade fadeFaÃ§ade;
+
+    [SerializeField]
+    PlayableDirector timeline; // ã‚¿ã‚¤ãƒ ãƒ©ã‚¤ãƒ³ã®å–å¾—
 
     UIInputProvider uiInputProvider;
     IntroductionSceneStateUpdater introductionSceneStateUpdater;
 
-    // ‚ß‚­‚ç‚ê‚éƒy[ƒW”
+    // ã‚ãã‚‰ã‚Œã‚‹ãƒšãƒ¼ã‚¸æ•°
     [SerializeField]
     int pageNum;
 
-    // 1ƒy[ƒW‚ª‚ß‚­‚ç‚ê‚éŠÔ
+    // 1ãƒšãƒ¼ã‚¸ãŒã‚ãã‚‰ã‚Œã‚‹æ™‚é–“
     [SerializeField]
     private float turnAnimationTime;
 
     [SerializeField]
     private float inputSkipTime;
 
-    // ‚¢‚Ü•\¦‚³‚ê‚Ä‚¢‚éƒy[ƒW”
+    // ã„ã¾è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹ãƒšãƒ¼ã‚¸æ•°
     private int currentpageNum = 1;
 
-    // ‚¢‚Üƒ|[ƒY’†‚©
+    // ã„ã¾ãƒãƒ¼ã‚ºä¸­ã‹
     bool isPause = false;
 
-    // ’·‰Ÿ‚µ‚·‚éŠÔ
+    // é•·æŠ¼ã—ã™ã‚‹æ™‚é–“
     float inputTime = 0;
 
-    // ƒGƒ“ƒ^[ƒL[‚ª‰Ÿ‚³‚ê‚½‚©
+    // ã‚¨ãƒ³ã‚¿ãƒ¼ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã‹
     bool isRetunKeyDown = false;
 
-    // ƒGƒ“ƒ^[ƒL[‚©‚ç—£‚ê‚½‚©
+    // ã‚¨ãƒ³ã‚¿ãƒ¼ã‚­ãƒ¼ã‹ã‚‰é›¢ã‚ŒãŸã‹
     bool isRetunKeyUp = false;
 
     // Start is called before the first frame update
     private void Start()
     {
-        timeline.Play(); // ƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶
+        timeline.Play(); // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
         introductionSceneStateUpdater = GetComponent<IntroductionSceneStateUpdater>();
         uiInputProvider = GetComponent<UIInputProvider>();
 
@@ -57,28 +60,29 @@ public class IntroductionAnimation : MonoBehaviour
             {
                 isRetunKeyUp = true;
             });
+        fadeFaÃ§ade.FadeIn();
     }
 
     // Update is called once per frame
     private void Update()
     {
         Debug.Log(isRetunKeyDown);
-        // ƒy[ƒW”‚²‚Æ‚Éƒ^ƒCƒ€ƒ‰ƒCƒ“‚ğˆê’â~
+        // ãƒšãƒ¼ã‚¸æ•°ã”ã¨ã«ã‚¿ã‚¤ãƒ ãƒ©ã‚¤ãƒ³ã‚’ä¸€æ™‚åœæ­¢
         if (turnAnimationTime * currentpageNum <= timeline.time)
         {
-            timeline.Pause(); // ˆê’â~‚·‚é
-            isPause = true;   // ˆê’â~’†
+            timeline.Pause(); // ä¸€æ™‚åœæ­¢ã™ã‚‹
+            isPause = true;   // ä¸€æ™‚åœæ­¢ä¸­
         }
-        // ƒy[ƒW”‚ªÅŒã‚Ìƒy[ƒW‚Ü‚Å“’B‚µ‚Ä‚È‚¢‚Æ‚«
-        // ƒL[‚ğ‰Ÿ‚µ‚½‚Æ‚«
+        // ãƒšãƒ¼ã‚¸æ•°ãŒæœ€å¾Œã®ãƒšãƒ¼ã‚¸ã¾ã§åˆ°é”ã—ã¦ãªã„ã¨ã
+        // ã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã¨ã
         if (isRetunKeyDown == true && pageNum >= currentpageNum)
         {
-            // ˆê’â~‚µ‚Ä‚¢‚é‚Æ‚«
+            // ä¸€æ™‚åœæ­¢ã—ã¦ã„ã‚‹ã¨ã
             if (isPause)
             {
-                timeline.Play();     // ƒ^ƒCƒ€ƒ‰ƒCƒ“‚ğÄ¶
-                isPause = false;     // ˆê’â~‰ğœ
-                currentpageNum += 1; // Ÿ‚Ìƒy[ƒW‚Ö
+                timeline.Play();     // ã‚¿ã‚¤ãƒ ãƒ©ã‚¤ãƒ³ã‚’å†ç”Ÿ
+                isPause = false;     // ä¸€æ™‚åœæ­¢è§£é™¤
+                currentpageNum += 1; // æ¬¡ã®ãƒšãƒ¼ã‚¸ã¸
             }
             else
             {
@@ -88,30 +92,30 @@ public class IntroductionAnimation : MonoBehaviour
         }
         else
         {
-            if(isRetunKeyDown) // ƒL[’·‰Ÿ‚µ
+            if(isRetunKeyDown) // ã‚­ãƒ¼é•·æŠ¼ã—
             {
-                // ƒL[‚ğ’·‰Ÿ‚µ‚µ‚Ä‚¢‚éŠÔ
+                // ã‚­ãƒ¼ã‚’é•·æŠ¼ã—ã—ã¦ã„ã‚‹æ™‚é–“
                 inputTime += Time.deltaTime;
             }
             else
             {
-                // ƒL[‚ğ—£‚µ‚½‚çŠÔ‚ğ0‚É‚·‚é
+                // ã‚­ãƒ¼ã‚’é›¢ã—ãŸã‚‰æ™‚é–“ã‚’0ã«ã™ã‚‹
                 inputTime = 0.0f;
             }
             if(inputSkipTime <= inputTime)
             {
-                // Ÿ‚ÌƒV[ƒ“‚Ö
+                // æ¬¡ã®ã‚·ãƒ¼ãƒ³ã¸
                 introductionSceneStateUpdater.LoadNextScene();
             }
         }
 
-        // ƒ^ƒCƒ€ƒ‰ƒCƒ“‚ªÅŒã‚Ü‚ÅÄ¶‚³‚ê‚½‚ç
+        // ã‚¿ã‚¤ãƒ ãƒ©ã‚¤ãƒ³ãŒæœ€å¾Œã¾ã§å†ç”Ÿã•ã‚ŒãŸã‚‰
         if(timeline.time + 0.1f >= timeline.duration)
         {
-            timeline.Stop();   // ƒ^ƒCƒ€ƒ‰ƒCƒ“‚ğ~‚ß‚é
-            timeline.time = 0.0f; // ƒ^ƒCƒ€ƒ‰ƒCƒ“‰Šú‰»
+            timeline.Stop();   // ã‚¿ã‚¤ãƒ ãƒ©ã‚¤ãƒ³ã‚’æ­¢ã‚ã‚‹
+            timeline.time = 0.0f; // ã‚¿ã‚¤ãƒ ãƒ©ã‚¤ãƒ³åˆæœŸåŒ–
 
-            // Ÿ‚ÌƒV[ƒ“‚Ö
+            // æ¬¡ã®ã‚·ãƒ¼ãƒ³ã¸
             introductionSceneStateUpdater.LoadNextScene();
         }
     }

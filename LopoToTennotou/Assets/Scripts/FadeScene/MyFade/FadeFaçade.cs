@@ -27,9 +27,10 @@ public class FadeFaçade : MonoBehaviour
     private async UniTask FadeProcess(float fadeSecond)
     {
         using (var scope = new FadeScope(fadeSecond, false, null,
-            () => isFadeFinish = false))
+            () => isFadeFinish = true))
         {
             await UniTask.WaitUntil(() => isFadeFinish);
+            Debug.Log(isFadeFinish);
         }
     }
 }
