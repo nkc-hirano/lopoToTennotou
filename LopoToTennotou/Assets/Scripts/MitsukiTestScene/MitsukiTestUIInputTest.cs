@@ -16,8 +16,4 @@ public class MitsukiTestUIInputTest : MonoBehaviour
             Debug.Log("‹N“®Šm”F");
         });
     }
-    void Update()
-    {
-        
-    }
 }
