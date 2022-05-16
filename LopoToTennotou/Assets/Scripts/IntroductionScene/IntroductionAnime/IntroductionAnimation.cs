@@ -36,9 +36,6 @@ public class IntroductionAnimation : MonoBehaviour
     // エンターキーが押されたか
     bool isRetunKeyDown = false;
 
-    // エンターキーから離れたか
-    bool isRetunKeyUp = false;
-
     // Start is called before the first frame update
     private void Start()
     {
@@ -55,14 +52,13 @@ public class IntroductionAnimation : MonoBehaviour
         uiInputProvider.DecisionButtonReleaseObservable
             .Subscribe(unit =>
             {
-                isRetunKeyUp = true;
+                isRetunKeyDown = false;
             });
     }
 
     // Update is called once per frame
     private void Update()
     {
-        Debug.Log(isRetunKeyDown);
         // ページ数ごとにタイムラインを一時停止
         if (turnAnimationTime * currentpageNum <= timeline.time)
         {
@@ -71,7 +67,7 @@ public class IntroductionAnimation : MonoBehaviour
         }
         // ページ数が最後のページまで到達してないとき
         // キーを押したとき
-        if (isRetunKeyDown == true && pageNum >= currentpageNum)
+        if (isRetunKeyDown && pageNum >= currentpageNum)
         {
             // 一時停止しているとき
             if (isPause)
@@ -87,8 +83,8 @@ public class IntroductionAnimation : MonoBehaviour
             isRetunKeyDown = false;
         }
         else
-        {
-            if(isRetunKeyDown) // キー長押し
+        {   
+            if (isRetunKeyDown) // キー長押し
             {
                 // キーを長押ししている時間
                 inputTime += Time.deltaTime;
@@ -98,15 +94,20 @@ public class IntroductionAnimation : MonoBehaviour
                 // キーを離したら時間を0にする
                 inputTime = 0.0f;
             }
-            if(inputSkipTime <= inputTime)
+            if (inputSkipTime <= inputTime)
             {
                 // 次のシーンへ
                 introductionSceneStateUpdater.LoadNextScene();
             }
         }
 
+        // 今のページ数が全体のページ数を超えたら
+        if (currentpageNum > pageNum)
+        {
+            timeline.Play();
+        }
         // タイムラインが最後まで再生されたら
-        if(timeline.time + 0.1f >= timeline.duration)
+        if (timeline.time + 0.1f >= timeline.duration)
         {
             timeline.Stop();   // タイムラインを止める
             timeline.time = 0.0f; // タイムライン初期化
@@ -114,5 +115,7 @@ public class IntroductionAnimation : MonoBehaviour
             // 次のシーンへ
             introductionSceneStateUpdater.LoadNextScene();
         }
+
+        Debug.Log(inputTime);
     }
 }
