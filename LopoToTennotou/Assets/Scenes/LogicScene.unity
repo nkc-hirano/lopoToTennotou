@@ -253,10 +253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625516fdac217a24ca85835069855c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageAsset: {fileID: 0}
-  stageDataFileNameList: []
-  rootObjSetSceneName: 
-  rootObjSetSceneNameForTutorial: 
+  stageAsset: {fileID: 11400000, guid: 7dde43870610db44888b57f7ebefae31, type: 2}
+  stageDataFileNameList:
+  - Stage0
   objPairs:
   - name: Start
     obj: {fileID: 8749137874857926427, guid: ae0d7a154231c8745ae89c795eeeebe9, type: 3}

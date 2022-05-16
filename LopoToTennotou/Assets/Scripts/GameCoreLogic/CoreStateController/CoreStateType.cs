@@ -12,6 +12,7 @@ namespace GameCore
         Start,
         GamePlay,
         Goal,
+        Faild,
         Final
     }
 }

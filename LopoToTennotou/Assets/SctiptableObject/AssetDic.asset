@@ -12,4 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 999c43773cfa49e4e97d1456235e0a5c, type: 3}
   m_Name: AssetDic
   m_EditorClassIdentifier: 
-  dicPairs: []
+  dicPairs:
+  - name: Start
+    obj: {fileID: 8749137874857926427, guid: ae0d7a154231c8745ae89c795eeeebe9, type: 3}
+  - name: Goal
+    obj: {fileID: 8453127875455227039, guid: f6ab1ca2a5125e44e947eaccf0061723, type: 3}
+  - name: Indestructible
+    obj: {fileID: 8447303808924542785, guid: 995c2b90d85e86341898775468bb867f, type: 3}
+  - name: Wall
+    obj: {fileID: 8309935154450073439, guid: c38f4996a73ff4a4eacf26698a383c57, type: 3}
+  - name: WallSide
+    obj: {fileID: 346953299380355074, guid: 6d82b0479619c664fa93a38ce98a5fc2, type: 3}
+  - name: MoveObj
+    obj: {fileID: 4515304748876909190, guid: f4ae858d9be0e85438d16ebcf7ff8f18, type: 3}
+  - name: ButtonObj
+    obj: {fileID: 6905696312732308149, guid: 37ff9a4821bbb054c869f73089c0b119, type: 3}
+  - name: ButtonObj2
+    obj: {fileID: 721809429087854706, guid: 21b706e9cc8298e4492ee00fe0b5aed1, type: 3}
+  - name: PitTrap
+    obj: {fileID: 3812898693964678384, guid: 0dcf5486682f96442a022b3862ceb6ea, type: 3}
+  - name: Dark
+    obj: {fileID: 6034018910567639136, guid: cc6f4df00f2712a46aca02d01db57204, type: 3}
+  - name: CannonTrapObj
+    obj: {fileID: 6393636911637356335, guid: a0f220702cdec8b42b8c7f6785be2208, type: 3}

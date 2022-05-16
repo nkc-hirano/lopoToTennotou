@@ -4,13 +4,19 @@ using UnityEngine;
 using UniHooks;
 using UniRx;
 using System;
+using Zenject;
 
 namespace GameCore
 {
     public class CoreStateController : MonoBehaviour
     {
+        [Inject]
+        StageInstantiater stageInstantiater;
+
+        static int currentLoadStageNum = 0;
         CoreStateUpdateProcessDef processes = new CoreStateUpdateProcessDef();
         Subject<CoreStateType> coreStateTypeUpdateSubject = new Subject<CoreStateType>();
+
 
         public IObserver<CoreStateType> CoreStateTypeUpdateObserver => coreStateTypeUpdateSubject;
 
@@ -25,9 +31,10 @@ namespace GameCore
                 switch (current)
                 {
                     case CoreStateType.None:
+                        currentLoadStageNum = 0;
                         break;
                     case CoreStateType.Init:
-                        processes.CoreGameInitStartProcess();
+                        processes.CoreGameInitStartProcess(stageInstantiater, currentLoadStageNum);
                         break;
                     case CoreStateType.Tutorial:
                         processes.GameTutorialStartProcess();
@@ -41,13 +48,16 @@ namespace GameCore
                     case CoreStateType.Goal:
                         processes.GameGoalProcess();
                         break;
+                    case CoreStateType.Faild:
+                        processes.GameFaildProcess();
+                        break;
                     case CoreStateType.Final:
                         processes.CoreGameFinalStartProcess();
                         break;
                     default:
                         break;
                 }
-            },value);
+            }, value);
         }
     }
 }

@@ -12,10 +12,6 @@ namespace GameCore
         StageAssetScriptableObject stageAsset;
         [SerializeField, Tooltip("0‚Ítutorial")]
         List<string> stageDataFileNameList = new List<string>();
-        [SerializeField]
-        string rootObjSetSceneName;
-        [SerializeField]
-        string rootObjSetSceneNameForTutorial;
 
         [SerializeField]
         NameStageObjPair[] objPairs;
@@ -32,6 +28,8 @@ namespace GameCore
         {
             //StageCreate();
         }
+
+        public GameObject RootObject => gimmckObjMother;
 
         public void StageCreate(int stageNum)
         {
