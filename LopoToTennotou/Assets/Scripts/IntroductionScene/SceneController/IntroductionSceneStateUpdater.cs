@@ -24,6 +24,7 @@ namespace SceneController
             await UniTask.Delay((int)waitSecondTime * 1000);
             token.ThrowIfCancellationRequested();
             controller.SceneTypeUpdateObserver.OnNext(SceneStateType.Tutorial);
+            
         }
     }
 }
