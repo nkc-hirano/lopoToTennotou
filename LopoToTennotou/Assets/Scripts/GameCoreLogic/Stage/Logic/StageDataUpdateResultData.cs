@@ -6,6 +6,8 @@ namespace GameCore
 {
     public readonly struct StageDataUpdateResultData
     {
+        public static StageDataUpdateResultData Enpty => new StageDataUpdateResultData();
+
         public readonly byte beforeX;
         public readonly byte beforeY;
         public readonly byte currentX;
