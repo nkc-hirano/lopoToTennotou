@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Test_Trap.Cannon
+namespace Trap.Cannon
 {
-    public class Test_CannonController : MonoBehaviour
+    public class CannonController : MonoBehaviour
     {
         [SerializeField]
         GameObject bullet;      // 弾オブジェクト
@@ -45,7 +45,6 @@ namespace Test_Trap.Cannon
 
             GameObject myBullet = Instantiate(bullet);
             myBullet.transform.position = gameObject.transform.position;
-            Debug.Log(gameObject.transform.eulerAngles + " " + plusPos);
             myBullet.GetComponent<Bullet.BulletController>().Shoot(new Vector3(bulletSpeed * plusPos.x, 0, bulletSpeed * plusPos.y));
         }
 

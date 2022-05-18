@@ -10,6 +10,7 @@ namespace GameCore
         Run,
         Action,
         Fall,
+        Hit,
         Stop,
     }
 }

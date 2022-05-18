@@ -1,7 +1,9 @@
+using GameCore;
 using System;
+using UniRx;
 using UnityEngine;
 
-namespace Test_Trap.Pit
+namespace Trap.Pit
 {
     public class PitController : MonoBehaviour
     {
@@ -9,16 +11,12 @@ namespace Test_Trap.Pit
 
         [SerializeField] Vector2 pit_offset;    // オブジェクトサイズハーフ
 
+        [SerializeField] PlayerCore core;
+        [SerializeField] PlayerSus sus;
+        
         Vector3 pos_o;
         GameObject charaObj;
         bool chek;
-        event Func<int> testEvent;
-
-        private int TestEvent()
-        {
-            Debug.Log("イベント");
-            return 0;
-        }
 
         TrapNumData CreateTraNumData(Vector3 pos, Vector2 offset)
         {
@@ -42,23 +40,18 @@ namespace Test_Trap.Pit
         {
             charaObj = GameObject.Find(charaName);
             pos_o = gameObject.transform.position;
-            testEvent += TestEvent;
         }
         void Update()
         {
             Vector3 pos_p = charaObj.transform.position;
+
             TrapNumData data_o = CreateTraNumData(pos_o, pit_offset);
             if (CheckCharacter(pos_p, data_o) && !chek)
             {
                 chek = true;
-                Debug.Log("アニメーション");
-                testEvent();
+                core.PlayerStateUpdate(PlayerStateType.Fall);
+                sus.PlayerSusSubject.OnNext(Unit.Default);
             }
-
-        }
-        private void OnDestroy()
-        {
-            testEvent -= TestEvent;
         }
     }
 }
