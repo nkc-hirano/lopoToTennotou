@@ -1,4 +1,4 @@
-namespace Test_Trap
+namespace Trap
 {
     struct TrapNumData
     {

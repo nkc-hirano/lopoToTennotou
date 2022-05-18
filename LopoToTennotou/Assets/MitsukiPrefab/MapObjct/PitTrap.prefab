@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 89564150798669036}
   - component: {fileID: -2621157789881064741}
   - component: {fileID: -2074748641953943828}
+  - component: {fileID: 624340363431983568}
   m_Layer: 0
   m_Name: PitTrap
   m_TagString: Untagged
@@ -95,3 +96,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &624340363431983568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3812898693964678384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44744e651a6e7245bf06fbbba6c702e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charaName: 
+  pit_offset: {x: 0, y: 0}

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Test_Trap.Bullet.Hit
+namespace Trap.Bullet.Hit
 {
-    public class Test_WallHit : MonoBehaviour, IHitBullet
+    public class WallBulletHit : MonoBehaviour, IHitBullet
     {
-        public void HitAction()
+        public void BulletHitAction()
         {
             Debug.Log("ï«Ç…ìñÇΩÇËÇ‹ÇµÇΩÅB");
         }

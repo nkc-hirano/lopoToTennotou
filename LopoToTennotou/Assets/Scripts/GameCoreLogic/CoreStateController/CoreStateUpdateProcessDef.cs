@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,7 +19,11 @@ namespace GameCore
 
         }
 
-        public void GameTutorialStartProcess() { }
+        public void GameTutorialStartProcess(IObserver<Unit> PlayerContllerableObserver) 
+        {
+
+        }
+
         public void GameStartProcess() { }
         public void GamePlayStartProcess() { }
         public void GameGoalProcess() { }
