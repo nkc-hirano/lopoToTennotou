@@ -5,12 +5,12 @@ using Zenject;
 public class CoreStateControllerInstaller : MonoInstaller
 {
     [SerializeField]
-    GameObject gameObject;
+    GameObject gameObj;
 
     public override void InstallBindings()
     {
         Container.BindInterfacesAndSelfTo<CoreStateController>()
-            .FromComponentOn(gameObject)
+            .FromComponentOn(gameObj)
             .AsSingle();
     }
 }

@@ -12,9 +12,9 @@ namespace GameCore
         Direction[,] currentButtonGimmickData = null;
         SpuareOptionFlag[,] currentOtherGimmickData = null;
         StageDataUpdateLogicDef logicDef = new StageDataUpdateLogicDef();
-        Subject<StageDataUpdateResultData> UpdateResultChangeSubject = new Subject<StageDataUpdateResultData>();
+        Subject<StageDataUpdateResultData> updateResultChangeSubject = new Subject<StageDataUpdateResultData>();
 
-        public IObservable<StageDataUpdateResultData> UpdateResultChangeObserbable => UpdateResultChangeSubject;
+        public IObservable<StageDataUpdateResultData> UpdateResultChangeObserbable => updateResultChangeSubject;
 
         public void StageDataRegister(Direction[,] moveGimmickData, Direction[,] goalGimmickData, SpuareOptionFlag[,] otherGimmickData)
         {
@@ -38,7 +38,7 @@ namespace GameCore
                 ref currentOtherGimmickData,
                 stageDataUpdateData,
                 out StageDataUpdateResultData resultData);
-            UpdateResultChangeSubject.OnNext(resultData);
+            updateResultChangeSubject.OnNext(resultData);
         }
     }
 }
