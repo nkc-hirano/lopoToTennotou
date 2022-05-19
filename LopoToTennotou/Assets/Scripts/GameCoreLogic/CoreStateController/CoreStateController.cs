@@ -13,10 +13,12 @@ namespace GameCore
         [Inject]
         StageInstantiater stageInstantiater;
 
+        static Subject<Unit> playerContllerableSubject = new Subject<Unit>();
+        public static IObserver<Unit> PlayerContllerableObserver => playerContllerableSubject;
+
         static int currentLoadStageNum = 0;
         CoreStateUpdateProcessDef processes = new CoreStateUpdateProcessDef();
         Subject<CoreStateType> coreStateTypeUpdateSubject = new Subject<CoreStateType>();
-
 
         public IObserver<CoreStateType> CoreStateTypeUpdateObserver => coreStateTypeUpdateSubject;
 
@@ -37,7 +39,7 @@ namespace GameCore
                         processes.CoreGameInitStartProcess(stageInstantiater, currentLoadStageNum);
                         break;
                     case CoreStateType.Tutorial:
-                        processes.GameTutorialStartProcess();
+                        processes.GameTutorialStartProcess(PlayerContllerableObserver);
                         break;
                     case CoreStateType.Start:
                         processes.GameStartProcess();

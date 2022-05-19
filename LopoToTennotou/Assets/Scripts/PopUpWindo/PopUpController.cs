@@ -3,12 +3,17 @@ using UnityEngine;
 
 public class PopUpController : MonoBehaviour
 {
+    public static PopUpController instance;
     [SerializeField] GameObject[] prefabPopUpObj;   // 元となるオブジェクト
     [SerializeField] bool key;                      // 入力検知用
 
     [SerializeField] int number;                    // オブジェクト番号
     const int FRAMELATE = 60;                       // フレームレート数
 
+    private void Awake()
+    {
+        instance = this;
+    }
     public async void PopUpObjController(int number)
     {
         // 描写するものを入る
@@ -38,17 +43,7 @@ public class PopUpController : MonoBehaviour
     private void Update()
     {
         string keynum = Input.inputString;
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            // PopUp 引数は元となるオブジェクト番号
-            PopUpObjController(number);
-        }        
-        else if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            // PopUp 引数は元となるオブジェクト番号
-            PopUpWindoController(number);
-        }
-        else if (keynum.ToString() != "")
+        if (keynum.ToString() != "")
         {
             key = true;
             keynum = null;

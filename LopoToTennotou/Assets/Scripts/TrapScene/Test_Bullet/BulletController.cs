@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Test_Trap.Bullet
+namespace Trap.Bullet
 {
     public class BulletController : MonoBehaviour
     {
@@ -12,7 +12,7 @@ namespace Test_Trap.Bullet
         {
             if (collision.gameObject.GetComponent<Hit.IHitBullet>() != null) 
             {
-                collision.gameObject.GetComponent<Hit.IHitBullet>().HitAction();
+                collision.gameObject.GetComponent<Hit.IHitBullet>().BulletHitAction();
                 Destroy(gameObject);
             }
         }
