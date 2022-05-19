@@ -98,6 +98,7 @@ public class IntroductionAnimation : MonoBehaviour
             {
                 // 次のシーンへ
                 introductionSceneStateUpdater.LoadNextScene();
+                inputTime = 0.0f;
             }
         }
 
@@ -115,7 +116,5 @@ public class IntroductionAnimation : MonoBehaviour
             // 次のシーンへ
             introductionSceneStateUpdater.LoadNextScene();
         }
-
-        Debug.Log(inputTime);
     }
 }
