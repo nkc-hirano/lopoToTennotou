@@ -20,7 +20,7 @@ namespace GameCore
             // âEÇÃóÕÇ™ã≠Ç©Ç¡ÇΩÇÁê≥
             int powerDiff = inUpdateData.rightPower - inUpdateData.rightPower;
 
-            var rotInfo = CulRotBehavior(inUpdateData.dir, powerDiff);
+            var rotInfo = CulRotBehavior(moveGimmickDataData[inUpdateData.x, inUpdateData.y], powerDiff);
             var posInfo = CulPosBehavior(inUpdateData.dir, Mathf.Min(inUpdateData.rightPower, inUpdateData.rightPower),
                 inUpdateData.x, inUpdateData.y,
                 moveGimmickDataData, buttonGimmickData, otherGimmickData);
@@ -41,13 +41,22 @@ namespace GameCore
             in Direction[,] buttonGimmickData,
             in SpuareOptionFlag[,] otherGimmickData)
         {
-            int searchPosX;
-            int searchPosY;
             for (int i = 0; i < power; i++)
             {
-                 
+                //int searchPosX = posX + ;
+                int searchPosY;
             }
+
             return (posX, posY);
+
+            (int x, int y) GetNextPos(Direction dir, int x, int y)
+            {
+                return dir switch
+                {
+
+                    _ => throw new InvalidOperationException()
+                };
+            }
         }
 
 
