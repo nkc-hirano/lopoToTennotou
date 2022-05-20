@@ -255,7 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageAsset: {fileID: 11400000, guid: 7dde43870610db44888b57f7ebefae31, type: 2}
   stageDataFileNameList:
-  - Stage22
+  - Stage0
   - Stage1
   - Stage2
   - Stage3
