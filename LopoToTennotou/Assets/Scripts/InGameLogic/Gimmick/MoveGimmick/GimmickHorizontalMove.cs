@@ -21,8 +21,8 @@ namespace GameCore
             TryGetComponent(out core);
 
             //‚±‚±‚©‚ç
-            core.CoordObservable.Subscribe();
-            core.DirObservable.Subscribe();
+
+            core.MovePosOservable.Subscribe(val => transform.position = val);
         }
     }
 }

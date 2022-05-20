@@ -1,17 +1,25 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Trap;
+using GameCore;
+using Zenject;
+using UniRx;
 
-namespace Test_TimerCount.Clear
+namespace TimerCount.Clear
 {
-    public class Test_ClearPointController : MonoBehaviour
+    public class ClearPointController : MonoBehaviour
     {
         [SerializeField] GameObject player;
         [SerializeField] Vector2 objOffset;
 
-        public event Func<int> eventSystemHandler;
+        [Inject]
+        CoreStateController coreStateController;
+
+        // private Subject<int> goulSubject;
+        // public IObservable<int> GoulObservable => goulSubject; 
+
+        // public event Func<int> eventSystemHandler;
+
         TrapNumData CreateTrapNumData(Vector3 pos,Vector2 offset) 
         {
             TrapNumData trapNumDataBox = new TrapNumData();
@@ -31,8 +39,7 @@ namespace Test_TimerCount.Clear
         }
         private void Start()
         {
-            eventSystemHandler += TestEvent;
-           
+            //goulSubject.Subscribe(var => { TestEvent(); });
         }
         private void Update()
         {
@@ -44,17 +51,20 @@ namespace Test_TimerCount.Clear
             // プレイヤがエリア内に入ったことを検知したらイベント発火
             if (CheckCharacter(pos_P, oData))
             {
-                eventSystemHandler();
+                TestEvent();
+                //eventSystemHandler();
             }
         }
-        private int TestEvent()
+        private void TestEvent()
         {
             Debug.Log("クリア");
-            return 0;
+
+            coreStateController.CoreStateTypeUpdateObserver.OnNext(CoreStateType.Goal);
+//            return 0;
         }
         private void OnDestroy()
         {
-            eventSystemHandler -= TestEvent;
+           // eventSystemHandler -= TestEvent;
         }
     }
 }
