@@ -1,25 +1,40 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
-using Test_TimerCount.Clear;
+using System;
+using GameCore;
+using Zenject;
 
-namespace Test_TimerCount
+namespace TimerCount
 {
     public class TimerController : MonoBehaviour
     {
-        [SerializeField] Text timeCounterText;                              // 時間表示テキスト
-        [SerializeField] Test_ClearPointController clearPointController;    // クリア状況
+        public static TimerController instance;
 
+        [Inject]
+        CoreStateController coreStateController;
+        [SerializeField] Text timeCounterText;                              // 時間表示テキスト
+     
         bool stopFlg;   // 動作をとめるフラグ
 
         delegate void TimerEverntHandler(float time);
         event TimerEverntHandler OnTimeChanged;
+        public event Action<float> stratHandler;
+        float time = 0;
 
-        public int FlagChange() 
+        private void Awake()
+        {
+            OnTimeChanged += TextUpdate;
+        }
+        private void Start()
+        {
+            coreStateController.CoreStateTypeUpdateObserver.OnNext(CoreStateType.GamePlay);
+        }
+
+        private void FlagChange() 
         {
             // フラグを切り替える
             stopFlg = stopFlg ? false : true;
-            return 0;
         }
         void TextUpdate(float time)
         {
@@ -29,7 +44,6 @@ namespace Test_TimerCount
         IEnumerator TimerCoroutine() 
         {
             // 時間を更新
-            float time = 0;
             while (!stopFlg) 
             {
                 time += 0.1f;
@@ -37,20 +51,22 @@ namespace Test_TimerCount
                 yield return new WaitForSeconds(0.1f);
             }
         }
-        private void Awake()
-        {
-            OnTimeChanged += TextUpdate;
-            clearPointController.eventSystemHandler += FlagChange;
-        }
-        void Start()
+        public void StartTimer()
         {
             // イベント発火
             StartCoroutine(TimerCoroutine());
         }
+
+        public void EndTimer()
+        {
+            Debug.Log(time.ToString("F1"));
+            FlagChange();
+//            coreStateController.CoreStateTypeUpdateObserver.OnNext(CoreStateType.Goal);
+        }
+
         private void OnDestroy()
         {
             OnTimeChanged -= TextUpdate;
-            clearPointController.eventSystemHandler -= FlagChange;
         }
     }
 }

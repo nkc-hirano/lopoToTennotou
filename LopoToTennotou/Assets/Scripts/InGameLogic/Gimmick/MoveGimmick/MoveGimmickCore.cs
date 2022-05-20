@@ -14,17 +14,32 @@ namespace GameCore
         ReactiveProperty<(byte x, byte y)> coordProperty = new ReactiveProperty<(byte, byte)>();
         ReactiveProperty<Direction> dirProperty = new ReactiveProperty<Direction>();
 
+        Subject<Vector2> movePosSubject = new Subject<Vector2>();
+        Subject<Vector2> moveDirSubject = new Subject<Vector2>();
+
         public IObservable<(byte x, byte y)> CoordObservable => coordProperty;
         public IObservable<Direction> DirObservable => dirProperty;
 
+        public IObservable<Vector2> MovePosOservable => movePosSubject;
+        public IObservable<Vector2> MoveDirOservable => moveDirSubject;
+
+
         private void Start()
         {
-            controller.UpdateResultChangeObserbable.Subscribe(StageUpdateDataReceive);
+            coordProperty.Value = (2, 2);
+            // controller.UpdateResultChangeObserbable.Subscribe(StageUpdateDataReceive);
+        }
+        private void Update()
+        {
+            CoordUpdate(3,2);
         }
 
         private void CoordUpdate(byte x, byte y)
         {
+           
             coordProperty.Value = (x, y);
+            // Logicへのインターフェイスのメソッドコール
+
         }
 
         private void DirUpdate(Direction dir)
@@ -48,6 +63,11 @@ namespace GameCore
 
             CoordUpdate(stageDataUpdateResultData.currentX, stageDataUpdateResultData.currentY);
             DirUpdate(stageDataUpdateResultData.currentDir);
+        }
+
+        private void Hoge(Vector2 vec2)
+        {
+            movePosSubject.OnNext(vec2);
         }
     }
 }

@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TimerCount;
 
 namespace GameCore
 {
     public struct CoreStateUpdateProcessDef
     {
+        
         public void CoreGameInitStartProcess(StageInstantiater stageInstantiater, int StageNum)
         {
             const string TUTORIAL_SCENE_NAME = "TutorialScene";
@@ -16,7 +18,6 @@ namespace GameCore
             stageInstantiater.StageCreate(StageNum);
             Scene scene = StageNum == 0 ? SceneManager.GetSceneByName(TUTORIAL_SCENE_NAME) : SceneManager.GetSceneByName(GAME_SCENE_NAME);
             SceneManager.MoveGameObjectToScene(stageInstantiater.RootObject, scene);
-
         }
 
         public void GameTutorialStartProcess(IObserver<Unit> PlayerContllerableObserver) 
@@ -25,8 +26,19 @@ namespace GameCore
         }
 
         public void GameStartProcess() { }
-        public void GamePlayStartProcess() { }
-        public void GameGoalProcess() { }
+        public void GamePlayStartProcess() 
+        {
+            // タイマー開始
+            Debug.Log("タイマー開始");
+            TimerController.instance.StartTimer();
+        }
+        public void GameGoalProcess()
+        {
+            // タイマーが動いていることを確認
+            // タイマー停止
+            Debug.Log("タイマー停止");
+            TimerController.instance.EndTimer();
+        }
         public void GameFaildProcess() { }
         public void CoreGameFinalStartProcess() { }
     }
