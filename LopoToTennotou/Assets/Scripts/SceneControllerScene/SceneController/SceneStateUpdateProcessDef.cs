@@ -26,14 +26,14 @@ namespace SceneController
 
         public void IntroductionStateStartProcess()
         {
-            SceneManager.LoadSceneAsync(introductionSceneName, LoadSceneMode.Additive);
             SceneManager.UnloadSceneAsync(titleSceneName);
+            SceneManager.LoadSceneAsync(introductionSceneName, LoadSceneMode.Additive);
         }
 
         public void TutorialStateStartProcess()
         {
-            SceneManager.LoadSceneAsync(tutorialSceneName, LoadSceneMode.Additive);
             SceneManager.UnloadSceneAsync(introductionSceneName);
+            SceneManager.LoadSceneAsync(tutorialSceneName, LoadSceneMode.Additive);
         }
 
         public void GameStateStartProcess(int id = 0)

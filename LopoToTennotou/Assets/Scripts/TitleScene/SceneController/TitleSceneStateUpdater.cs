@@ -20,7 +20,7 @@ namespace SceneController
         {
             float waitSecondTime = 1.01f;
             // ここでフェードアウトを呼び出しているのでIntroductionSceneでFadeInメソッドを必ず呼ぶ
-            fadeFaçade.FadeOut(waitSecondTime);
+            fadeFaçade.FadeOut(waitSecondTime, true);
             await UniTask.Delay((int)waitSecondTime * 1000);
             token.ThrowIfCancellationRequested();
             controller.SceneTypeUpdateObserver.OnNext(SceneStateType.Introduction);

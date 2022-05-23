@@ -41,10 +41,13 @@ namespace GameCore
             in Direction[,] buttonGimmickData,
             in SpuareOptionFlag[,] otherGimmickData)
         {
+            (int x, int y) nextDirTuple = default;
+            int searchPosX = posX;
+            int searchPosY = posY;
+
             for (int i = 0; i < power; i++)
             {
-                //int searchPosX = posX + ;
-                int searchPosY;
+                nextDirTuple = GetNextPos(dir, searchPosX, searchPosY);
             }
 
             return (posX, posY);
@@ -53,7 +56,11 @@ namespace GameCore
             {
                 return dir switch
                 {
-
+                    Direction.Zero => (0 + x, 0 + y),
+                    Direction.Up => (0 + x, 1 + y),
+                    Direction.Down => (0 + x, -1 + y),
+                    Direction.Right => (1 + x, 0 + y),
+                    Direction.Left => (-1 + x, 0 + y),
                     _ => throw new InvalidOperationException()
                 };
             }

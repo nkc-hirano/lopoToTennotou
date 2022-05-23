@@ -44,6 +44,8 @@ public class TitleAnimation : MonoBehaviour
         titleSceneStateUpdater = GetComponent<TitleSceneStateUpdater>();
         uiInputProvider = GetComponent<UIInputProvider>();
 
+        Debug.Log(uiInputProvider);
+
         uiInputProvider.DecisionButtonObservable
             .Subscribe(unit =>
             {

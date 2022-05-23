@@ -14,9 +14,9 @@ public class FadeFaçade : MonoBehaviour
         FadeExecutor.FadeInInitialize(initFadeSecond);
     }
 
-    public void FadeOut(float fadeSecond)
+    public void FadeOut(float fadeSecond, bool isAnimation)
     {
-        FadeProcess(fadeSecond).Forget();
+        FadeProcess(fadeSecond,isAnimation).Forget();
     }
 
     public void FadeIn()
@@ -24,9 +24,9 @@ public class FadeFaçade : MonoBehaviour
         isFadeFinish = true;
     }
 
-    private async UniTask FadeProcess(float fadeSecond)
+    private async UniTask FadeProcess(float fadeSecond, bool isAnimasion)
     {
-        using (var scope = new FadeScope(fadeSecond, false, null,
+        using (var scope = new FadeScope(fadeSecond, isAnimasion, null,
             () => isFadeFinish = true))
         {
             await UniTask.WaitUntil(() => isFadeFinish);
