@@ -22,7 +22,11 @@ namespace GameCore
 
             //‚±‚±‚©‚ç
 
-            core.MovePosOservable.Subscribe(val => transform.position = val);
+            core.MovePosOservable.Subscribe(val =>
+            {
+                Debug.Log(val);
+                transform.position = val;
+            });
         }
     }
 }

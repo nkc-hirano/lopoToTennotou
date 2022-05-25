@@ -14,32 +14,45 @@ namespace GameCore
         ReactiveProperty<(byte x, byte y)> coordProperty = new ReactiveProperty<(byte, byte)>();
         ReactiveProperty<Direction> dirProperty = new ReactiveProperty<Direction>();
 
-        Subject<Vector2> movePosSubject = new Subject<Vector2>();
+        Subject<Vector3> movePosSubject = new Subject<Vector3>();
         Subject<Vector2> moveDirSubject = new Subject<Vector2>();
 
         public IObservable<(byte x, byte y)> CoordObservable => coordProperty;
         public IObservable<Direction> DirObservable => dirProperty;
 
-        public IObservable<Vector2> MovePosOservable => movePosSubject;
+        public IObservable<Vector3> MovePosOservable => movePosSubject;
         public IObservable<Vector2> MoveDirOservable => moveDirSubject;
 
+        StageInstantiater stageInstantiater = new StageInstantiater();
+
+        // 入力側
+        [Inject]
+        IInputConverterToVecter inputConverterToVecter;
+
+        // 出力側
+        [Inject]
+        IOutputConverterToVecter outputConverterToVecter;
 
         private void Start()
         {
-            coordProperty.Value = (2, 2);
-            // controller.UpdateResultChangeObserbable.Subscribe(StageUpdateDataReceive);
+            outputConverterToVecter.ConvertResultObservable
+                .Select(val => val.pos) 
+                .Subscribe(movePosSubject);
+            Debug.Log("  gagag");
+            stageInstantiater.Hoge(gameObject.name,out byte x, out byte y, out int mapScale);
+            CoordUpdate(x, y, mapScale);
         }
         private void Update()
         {
-            CoordUpdate(3,2);
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+                CoordUpdate(1, 2, 15);
         }
 
-        private void CoordUpdate(byte x, byte y)
+        private void CoordUpdate(byte x, byte y,int mapScale)
         {
-           
             coordProperty.Value = (x, y);
             // Logicへのインターフェイスのメソッドコール
-
+            inputConverterToVecter.ConvertVec(new InputStructConverterToVecter(x,y, mapScale));
         }
 
         private void DirUpdate(Direction dir)
@@ -61,7 +74,7 @@ namespace GameCore
             if (stageDataUpdateResultData.beforeX != coordProperty.Value.x) { return; }
             if (stageDataUpdateResultData.beforeY != coordProperty.Value.y) { return; }
 
-            CoordUpdate(stageDataUpdateResultData.currentX, stageDataUpdateResultData.currentY);
+           // CoordUpdate(stageDataUpdateResultData.currentX, stageDataUpdateResultData.currentY);
             DirUpdate(stageDataUpdateResultData.currentDir);
         }
 
