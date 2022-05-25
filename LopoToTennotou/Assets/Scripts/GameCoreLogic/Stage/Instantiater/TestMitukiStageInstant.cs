@@ -1,24 +1,14 @@
-using Cysharp.Threading.Tasks;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace GameCore
 {
-    public class StageInstantiater : StageDataLoaderBase
+    public class TestMitukiStageInstant : MonoBehaviour
     {
-        [SerializeField]
-        StageAssetScriptableObject stageAsset;
-        [SerializeField, Tooltip("0はtutorial")]
-        List<string> stageDataFileNameList = new List<string>();
-
         [SerializeField]
         NameStageObjPair[] objPairs;
         [SerializeField]
         string stdData;
-
-        static Dictionary<string, XYPOS> posDic;
 
         Direction[,] moveGimmickData = null;
         Direction[,] buttonGimmickData = null;
@@ -28,29 +18,22 @@ namespace GameCore
 
         void Start()
         {
-            posDic = new Dictionary<string, XYPOS>();
-            //StageCreate();
+            StageCreate();
         }
 
         public GameObject RootObject => gimmckObjMother;
 
-        public void StageCreate(int stageNum)
+        public void StageCreate()
         {
-            if (stageDataFileNameList.Count < stageNum)
-            {
-                Debug.Log($"無効なエラー");
-                return;
-            }
+
             // ファイルを読み込みテキスト変換
-            TextAsset txtData = (TextAsset)Resources.Load(stageDataFileNameList[stageNum]);
+            TextAsset txtData = (TextAsset)Resources.Load(stdData);
             // jsonファイルとして変換してStageDataFileFormat型に変換
             var jsonData = JsonUtility.FromJson<StageDataFileFormat>(txtData.text);
             // オブジェクトの位置情報を取得
             jsonData.GetParallelData(out moveGimmickData, out buttonGimmickData, out otherGimmickData);
 
             // オブジェクトの位置情報を登録?
-            initializer = gameObject.AddComponent<StageDataController>();
-            initializer.StageDataRegister(moveGimmickData, buttonGimmickData, otherGimmickData);
 
             // オブジェクトの生成
             CreateObject(jsonData);
@@ -214,29 +197,10 @@ namespace GameCore
             float offset = (data.xLength - 1) / 2;
             GameObject gimmckObj = Instantiate(objPairs[(int)nuber].obj);
 
-            gimmckObj.name = i + "_" + j;
-            posDic[gameObject.name] = new XYPOS((byte)i, (byte)j, data.xLength);
             gimmckObj.transform.eulerAngles = dir;
             gimmckObj.transform.localPosition = new Vector3(j - offset, 0, -i + offset);
             gimmckObj.transform.parent = gimmckObjMother.transform;
         }
 
-        public void Hoge(string name,out byte x,out byte y,out int mapScale)
-        {
-            
-            if (posDic.ContainsKey(gameObject.name))
-            {
-                Debug.Log("Gagagagagagagag");
-                x = posDic[gameObject.name].x;
-                y = posDic[gameObject.name].y;
-                mapScale = posDic[gameObject.name].mapScale;
-            }
-            else
-            {
-                x = default;
-                y = default;
-                mapScale = default;
-            }
-        }
     }
 }

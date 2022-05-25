@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:LopoToTennotou/Assets/Resources/KaedeStage9-29.json.meta
 guid: 05f5a9b09539fc34d817ff09c26e1341
 TextScriptImporter:
+=======
+guid: 56b8dffb2b5aaa845927a9bd41bf1abc
+folderAsset: yes
+DefaultImporter:
+>>>>>>> 40d4affba77c8639af9aa019eb5fb753e842c6aa:LopoToTennotou/Assets/Scripts/GameCoreLogic/ConverterToVecterInput.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
