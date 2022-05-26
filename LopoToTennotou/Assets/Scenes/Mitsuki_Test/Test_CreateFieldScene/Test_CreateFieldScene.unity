@@ -306,7 +306,7 @@ MonoBehaviour:
     obj: {fileID: 6034018910567639136, guid: cc6f4df00f2712a46aca02d01db57204, type: 3}
   - name: cann
     obj: {fileID: 6393636911637356335, guid: a0f220702cdec8b42b8c7f6785be2208, type: 3}
-  stdData: KaedeStage9-1
+  stdData: 15x15_19F
 --- !u!1 &2133619491
 GameObject:
   m_ObjectHideFlags: 0
