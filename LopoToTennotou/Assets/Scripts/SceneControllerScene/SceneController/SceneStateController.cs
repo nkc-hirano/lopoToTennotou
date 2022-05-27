@@ -24,6 +24,8 @@ namespace SceneController
             {
                 switch (current)
                 {
+                    case SceneStateType.None:
+                        break;
                     case SceneStateType.Init:
                         updateProcessDef.InitStateStartProcess();
                         break;
@@ -40,6 +42,7 @@ namespace SceneController
                         updateProcessDef.GameStateStartProcess();
                         break;
                     case SceneStateType.Ending:
+                        updateProcessDef.EndingStartScene();
                         break;
                     default:
                         throw new ArgumentException();

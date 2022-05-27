@@ -5,11 +5,14 @@ using UniHooks;
 using UniRx;
 using System;
 using Zenject;
+using SceneController;
 
 namespace GameCore
 {
     public class CoreStateController : MonoBehaviour
     {
+        [Inject]
+        SceneStateController sceneStateController;
         [Inject]
         StageInstantiater stageInstantiater;
 
@@ -21,6 +24,7 @@ namespace GameCore
         Subject<CoreStateType> coreStateTypeUpdateSubject = new Subject<CoreStateType>();
 
         public IObserver<CoreStateType> CoreStateTypeUpdateObserver => coreStateTypeUpdateSubject;
+        public IObservable<CoreStateType> CoreStateTypeUpdateObservable => coreStateTypeUpdateSubject;
 
         void Start()
         {
@@ -37,6 +41,7 @@ namespace GameCore
                         break;
                     case CoreStateType.Init:
                         processes.CoreGameInitStartProcess(stageInstantiater, currentLoadStageNum);
+                        currentLoadStageNum++;
                         break;
                     case CoreStateType.Tutorial:
                         processes.GameTutorialStartProcess(PlayerContllerableObserver);
@@ -51,10 +56,10 @@ namespace GameCore
                         processes.GameGoalProcess();
                         break;
                     case CoreStateType.Faild:
-                        processes.GameFaildProcess();
+                        processes.GameFaildProcess(currentLoadStageNum, CoreStateTypeUpdateObserver);
                         break;
                     case CoreStateType.Final:
-                        processes.CoreGameFinalStartProcess();
+                        processes.CoreGameFinalStartProcess(currentLoadStageNum, sceneStateController);
                         break;
                     default:
                         break;

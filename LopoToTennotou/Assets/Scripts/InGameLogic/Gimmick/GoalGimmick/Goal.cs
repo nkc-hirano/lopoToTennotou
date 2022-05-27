@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TimerCount;
 using UnityEngine;
+using Zenject;
 
 namespace GameCore
 {
@@ -14,6 +16,7 @@ namespace GameCore
             if (hitPlayer != null)
             {
                 hitPlayer.GoalAction();
+                //TimerController.instance.EndTimer();
                 //Debug.Log("プレイヤーが当たりました。");
             }
         }

@@ -17,8 +17,8 @@ namespace TimerCount
      
         bool stopFlg;   // “®ì‚ğ‚Æ‚ß‚éƒtƒ‰ƒO
 
-        delegate void TimerEverntHandler(float time);
-        event TimerEverntHandler OnTimeChanged;
+        public delegate void TimerEverntHandler(float time);
+        public event TimerEverntHandler OnTimeChanged;
         public event Action<float> stratHandler;
         float time = 0;
 

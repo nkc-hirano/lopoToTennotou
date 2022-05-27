@@ -11,7 +11,9 @@ namespace SceneController
         private static readonly string introductionSceneName = "IntroductionScene";
         private static readonly string tutorialSceneName = "TutorialScene";
         private static readonly string gameSceneName = "GameScene";
+        private static readonly string endingSceneName = "EndingScene";
 
+        private static int gameSceneLoadNum = 0;
 
         public void InitStateStartProcess()
         {
@@ -36,10 +38,26 @@ namespace SceneController
             SceneManager.LoadSceneAsync(tutorialSceneName, LoadSceneMode.Additive);
         }
 
-        public void GameStateStartProcess(int id = 0)
+        public void GameStateStartProcess()
         {
+            if (gameSceneLoadNum == 0)
+            {
+                SceneManager.UnloadSceneAsync(tutorialSceneName);
+                gameSceneLoadNum++;
+            }
+            else
+            {
+                SceneManager.UnloadSceneAsync(gameSceneName);
+            }
             SceneManager.LoadSceneAsync(gameSceneName, LoadSceneMode.Additive);
-            SceneManager.UnloadSceneAsync(tutorialSceneName);
+
+            
+        }
+
+        public void EndingStartScene()
+        {
+            SceneManager.UnloadSceneAsync(gameSceneName);
+            SceneManager.LoadSceneAsync(endingSceneName);
         }
     }
 }

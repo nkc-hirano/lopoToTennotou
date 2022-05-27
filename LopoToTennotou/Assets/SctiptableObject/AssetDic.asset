@@ -22,7 +22,7 @@ MonoBehaviour:
   - name: Wall
     obj: {fileID: 8309935154450073439, guid: c38f4996a73ff4a4eacf26698a383c57, type: 3}
   - name: WallSide
-    obj: {fileID: 346953299380355074, guid: 6d82b0479619c664fa93a38ce98a5fc2, type: 3}
+    obj: {fileID: 5824246947898784370, guid: 82cf91aaaf448a248b0742785d62e507, type: 3}
   - name: MoveObj
     obj: {fileID: 4515304748876909190, guid: f4ae858d9be0e85438d16ebcf7ff8f18, type: 3}
   - name: ButtonObj
