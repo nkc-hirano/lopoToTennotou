@@ -18,6 +18,8 @@ namespace GameCore
         [SerializeField]
         string stdData;
 
+        static Dictionary<string, XYPOS> posDic;
+
         Direction[,] moveGimmickData = null;
         Direction[,] buttonGimmickData = null;
         SpuareOptionFlag[,] otherGimmickData = null;
@@ -26,6 +28,7 @@ namespace GameCore
 
         void Start()
         {
+            posDic = new Dictionary<string, XYPOS>();
             //StageCreate();
         }
 
@@ -210,9 +213,30 @@ namespace GameCore
 
             float offset = (data.xLength - 1) / 2;
             GameObject gimmckObj = Instantiate(objPairs[(int)nuber].obj);
+
+            gimmckObj.name = i + "_" + j;
+            posDic[gameObject.name] = new XYPOS((byte)i, (byte)j, data.xLength);
             gimmckObj.transform.eulerAngles = dir;
             gimmckObj.transform.localPosition = new Vector3(j - offset, 0, -i + offset);
             gimmckObj.transform.parent = gimmckObjMother.transform;
+        }
+
+        public void Hoge(string name,out byte x,out byte y,out int mapScale)
+        {
+            
+            if (posDic.ContainsKey(gameObject.name))
+            {
+                Debug.Log("Gagagagagagagag");
+                x = posDic[gameObject.name].x;
+                y = posDic[gameObject.name].y;
+                mapScale = posDic[gameObject.name].mapScale;
+            }
+            else
+            {
+                x = default;
+                y = default;
+                mapScale = default;
+            }
         }
     }
 }

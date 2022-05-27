@@ -25,23 +25,23 @@ public class KaedeTestAnimation : MonoBehaviour
     void Update()
     {
         // デバッグ用
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(UnityEngine.Input.GetKeyDown(KeyCode.Alpha1))
         {
             PlayerState = PlayerStateType.Stay;
         }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
+        if(UnityEngine.Input.GetKeyDown(KeyCode.Alpha2))
         {
             PlayerState = PlayerStateType.Run;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha3))
         {
             PlayerState = PlayerStateType.Action;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha4))
         {
             PlayerState = PlayerStateType.Fall;
         }
-        if(Input.GetKeyDown(KeyCode.Alpha5))
+        if(UnityEngine.Input.GetKeyDown(KeyCode.Alpha5))
         {
             PlayerState = PlayerStateType.Stop;
         }
