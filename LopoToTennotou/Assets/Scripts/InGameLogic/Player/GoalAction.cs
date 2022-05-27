@@ -8,8 +8,6 @@ namespace GameCore
 {
     public class GoalAction : MonoBehaviour, IGoalable
     {
-        [Inject]
-        CoreStateController stateController;
         PlayerCore core = null;
 
         void Start()
@@ -21,8 +19,6 @@ namespace GameCore
         {
             // ÉSÅ[ÉãÇµÇΩèàóù
             Debug.Log("ÉSÅ[ÉãÇµÇΩÇÊÅB");
-            stateController.CoreStateTypeUpdateObserver.OnNext(CoreStateType.Goal);
-            stateController.CoreStateTypeUpdateObserver.OnNext(CoreStateType.Final);
             core.PlayerStateUpdate(PlayerStateType.Stop);
         }
     }

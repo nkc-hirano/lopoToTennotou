@@ -39,7 +39,30 @@ public class PopUpController : MonoBehaviour
             await UniTask.WaitWhile(() => !key);
         }
     }
-
+    public async void PopUpResultWindoController(int number)
+    {
+        // 描写するものを入る
+        using (var win = new RePopUpResultColl(prefabPopUpObj[number]))
+        {
+            // 移動待機
+            await UniTask.DelayFrame((int)(win.FadeTime * FRAMELATE));
+            Debug.Log("入力受付開始");
+            // 入力待機
+            await UniTask.WaitWhile(() => !key);
+        }
+    }
+    public async void PopUpStartStageNumberWindoController(int number)
+    {
+        // 描写するものを入る
+        using (var win = new RePopUpStartStageNumberwindowColl(prefabPopUpObj[number]))
+        {
+            // 移動待機
+            await UniTask.DelayFrame((int)(win.FadeTime * FRAMELATE));
+            Debug.Log("入力受付開始");
+            // 入力待機
+            await UniTask.WaitWhile(() => !key);
+        }
+    }
     private void Update()
     {
         string keynum = Input.inputString;

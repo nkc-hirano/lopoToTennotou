@@ -1,7 +1,7 @@
 using UniRx;
 using UnityEngine;
 
-public class MitsukiTest_ : MonoBehaviour
+public class OptionWindowCreateController : MonoBehaviour
 {
     [SerializeField] GameObject window;
     [SerializeField] GameObject canvas;

@@ -38,6 +38,7 @@ public class OptionWindowController : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 0;
         // 初期画面
         AudioClause();
         // 入力スクリプトセット
@@ -71,10 +72,12 @@ public class OptionWindowController : MonoBehaviour
         switch (num)
         {
             case 2:
+                Time.timeScale = 1;
                 Destroy(gameObject);    // 選択されたらオブジェクト削除
                 break;
             case 1:
                 AudioClause();          // 表示切り替え
+                VolumeExpression();
                 break;
             case 0:
                 Debug.Log("クレジット"); // デバッグ用

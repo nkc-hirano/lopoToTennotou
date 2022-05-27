@@ -8,6 +8,12 @@ namespace GameCore
 {
     public class Goal : MonoBehaviour
     {
+        PopUpController popUpController;
+        private void Start()
+        {
+            TryGetComponent(out popUpController);
+            StartCoroutine("PopUpStartStageNumberWindoCoroutine");
+        }
         private void OnTriggerEnter(Collider collision)
         {
             // プレイヤーのインターフェース取得
@@ -15,10 +21,16 @@ namespace GameCore
             // プレイヤーに当たったら
             if (hitPlayer != null)
             {
+                popUpController.PopUpResultWindoController(1);
                 hitPlayer.GoalAction();
                 //TimerController.instance.EndTimer();
                 //Debug.Log("プレイヤーが当たりました。");
             }
+        }
+        IEnumerator PopUpStartStageNumberWindoCoroutine() 
+        {
+            yield return new WaitForSeconds(2f);
+            popUpController.PopUpStartStageNumberWindoController(0);
         }
     }
 }
