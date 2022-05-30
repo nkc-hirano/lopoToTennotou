@@ -213,11 +213,13 @@ namespace GameCore
 
             float offset = (data.xLength - 1) / 2;
             GameObject gimmckObj = Instantiate(objPairs[(int)nuber].obj);
+            GameObject stageFloorObj = Instantiate(objPairs[objPairs.Length-1].obj);
 
             gimmckObj.name = i + "_" + j;
             posDic[gameObject.name] = new XYPOS((byte)i, (byte)j, data.xLength);
             gimmckObj.transform.eulerAngles = dir;
             gimmckObj.transform.localPosition = new Vector3(j - offset, 0, -i + offset);
+            stageFloorObj.transform.localPosition = new Vector3(j - offset, -1, -i + offset);
             gimmckObj.transform.parent = gimmckObjMother.transform;
         }
 

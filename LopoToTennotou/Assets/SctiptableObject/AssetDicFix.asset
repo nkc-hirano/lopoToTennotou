@@ -30,8 +30,10 @@ MonoBehaviour:
   - name: ButtonArowObj
     obj: {fileID: 5489198113301810829, guid: dce30ff039bde034da526fbc24518cf2, type: 3}
   - name: PitTrap
-    obj: {fileID: 3812898693964678384, guid: 0dcf5486682f96442a022b3862ceb6ea, type: 3}
+    obj: {fileID: 6313659534237540077, guid: 0dcf5486682f96442a022b3862ceb6ea, type: 3}
   - name: Dark
     obj: {fileID: 2087553774581388509, guid: 53c0533af623e00449d426d676f94c68, type: 3}
   - name: CannonTrapObj
     obj: {fileID: 4520695571409015150, guid: 1ed3a39414f1b4547917dbb58773e995, type: 3}
+  - name: Floor
+    obj: {fileID: 0}
