@@ -21,7 +21,7 @@ namespace GameCore
             // プレイヤーに当たったら
             if (hitPlayer != null)
             {
-                popUpController.PopUpResultWindoController(1);
+                popUpController.PopUpResultWindoController();
                 hitPlayer.GoalAction();
                 //TimerController.instance.EndTimer();
                 //Debug.Log("プレイヤーが当たりました。");
@@ -30,7 +30,7 @@ namespace GameCore
         IEnumerator PopUpStartStageNumberWindoCoroutine() 
         {
             yield return new WaitForSeconds(2f);
-            popUpController.PopUpStartStageNumberWindoController(0);
+            popUpController.PopUpStartStageNumberWindoController();
         }
     }
 }

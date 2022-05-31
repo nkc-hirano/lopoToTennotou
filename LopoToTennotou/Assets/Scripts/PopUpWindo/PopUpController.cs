@@ -39,28 +39,28 @@ public class PopUpController : MonoBehaviour
             await UniTask.WaitWhile(() => !key);
         }
     }
-    public async void PopUpResultWindoController(int number)
+    public async void PopUpResultWindoController()
     {
         // 描写するものを入る
-        using (var win = new RePopUpResultColl(prefabPopUpObj[number]))
+        using (var win = new RePopUpResultColl())
         {
             // 移動待機
             await UniTask.DelayFrame((int)(win.FadeTime * FRAMELATE));
             Debug.Log("入力受付開始");
             // 入力待機
-            await UniTask.DelayFrame((int)(win.FadeTime * FRAMELATE));
+            await UniTask.DelayFrame((int)(win.FadeTime));
         }
     }
-    public async void PopUpStartStageNumberWindoController(int number)
+    public async void PopUpStartStageNumberWindoController()
     {
         // 描写するものを入る
-        using (var win = new RePopUpStartStageNumberwindowColl(prefabPopUpObj[number]))
+        using (var win = new RePopUpStartStageNumberwindowColl())
         {
             // 移動待機
             await UniTask.DelayFrame((int)(win.FadeTime * FRAMELATE));
             Debug.Log("入力受付開始");
             // 入力待機
-            await UniTask.DelayFrame((int)(win.FadeTime * FRAMELATE));
+            await UniTask.DelayFrame((int)(win.FadeTime));
         }
     }
     private void Update()

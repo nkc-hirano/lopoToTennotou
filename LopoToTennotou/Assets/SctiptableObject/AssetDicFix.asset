@@ -35,5 +35,3 @@ MonoBehaviour:
     obj: {fileID: 2087553774581388509, guid: 53c0533af623e00449d426d676f94c68, type: 3}
   - name: CannonTrapObj
     obj: {fileID: 4520695571409015150, guid: 1ed3a39414f1b4547917dbb58773e995, type: 3}
-  - name: Floor
-    obj: {fileID: 0}

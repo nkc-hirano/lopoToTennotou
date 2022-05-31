@@ -490,7 +490,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeCounterText: {fileID: 291273252}
-  clearPointController: {fileID: 2121547213}
 --- !u!114 &291273252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -936,6 +935,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5eb6898be783534a90e92f3ae1b0707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  core: {fileID: 0}
+  sus: {fileID: 0}
 --- !u!1 &1592093497
 GameObject:
   m_ObjectHideFlags: 0

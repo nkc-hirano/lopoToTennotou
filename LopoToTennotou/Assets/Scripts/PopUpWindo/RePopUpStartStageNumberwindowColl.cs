@@ -5,11 +5,10 @@ using Cysharp.Threading.Tasks;
 public class RePopUpStartStageNumberwindowColl : IDisposable
 {
     public float FadeTime => PopUpStartStageNumberwindowLogic.inatance.FadeTime;
-    public RePopUpStartStageNumberwindowColl(GameObject popUpObj)
+    public RePopUpStartStageNumberwindowColl()
     {
         Time.timeScale = 0; // 停止
         PopUpStartStageNumberwindowLogic.inatance.CreatePopUpStartStageNumberWindo();    // オブジェクトの生成
-        PopUpStartStageNumberwindowLogic.inatance.SetChild(popUpObj);    // 子オブジェクトに設定
         PopUpStartStageNumberwindowLogic.inatance.PouUpSummonWind();     // ウィンド表示
     }
     public void Dispose()

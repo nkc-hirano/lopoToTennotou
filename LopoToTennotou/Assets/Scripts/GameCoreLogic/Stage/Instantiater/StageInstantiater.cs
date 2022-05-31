@@ -23,6 +23,7 @@ namespace GameCore
         int stageSize { set; get; }
 
         static Dictionary<string, XYPOS> posDic;
+        public int stageNumber { set; get; }
 
         Direction[,] moveGimmickData = null;
         Direction[,] buttonGimmickData = null;
@@ -45,6 +46,7 @@ namespace GameCore
                 Debug.Log($"無効なエラー");
                 return;
             }
+            stageNumber = stageNum;
             // ファイルを読み込みテキスト変換
             TextAsset txtData = (TextAsset)Resources.Load(stageDataFileNameList[stageNum]);
             // jsonファイルとして変換してStageDataFileFormat型に変換

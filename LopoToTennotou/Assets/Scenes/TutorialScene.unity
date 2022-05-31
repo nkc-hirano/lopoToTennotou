@@ -18529,9 +18529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 843483394388dde4aa9f31cb8201e6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabPopUpObj:
-  - {fileID: 1477570120209541458, guid: 0922b84988ddd0340be1eb621663cd62, type: 3}
-  - {fileID: 22318332775261700, guid: 0b346838eec45754abd1aaf1e7825aa1, type: 3}
+  prefabPopUpObj: []
   key: 0
   number: 0
 --- !u!114 &534216571

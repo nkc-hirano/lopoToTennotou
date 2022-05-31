@@ -5,11 +5,10 @@ using Cysharp.Threading.Tasks;
 public class RePopUpResultColl : IDisposable
 {
     public float FadeTime => PopUpResultLogic.inatance.FadeTime;
-    public RePopUpResultColl(GameObject popUpObj)
+    public RePopUpResultColl()
     {
         Time.timeScale = 0; // 停止
         PopUpResultLogic.inatance.CreatePopUpResultWindo();    // オブジェクトの生成
-        PopUpResultLogic.inatance.SetChild(popUpObj);    // 子オブジェクトに設定
         PopUpResultLogic.inatance.PouUpSummonWind();     // ウィンド表示
     }
     public void Dispose()
