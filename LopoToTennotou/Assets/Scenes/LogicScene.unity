@@ -357,6 +357,7 @@ MonoBehaviour:
   stageDataFileNameList:
   - 9x9_01O
   - 9x9_02O
+  floorObject: {fileID: 8309935154450073439, guid: c38f4996a73ff4a4eacf26698a383c57, type: 3}
   objPairs:
   - name: Start
     obj: {fileID: 8749137874857926427, guid: ae0d7a154231c8745ae89c795eeeebe9, type: 3}

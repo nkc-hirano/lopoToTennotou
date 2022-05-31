@@ -48,7 +48,7 @@ public class PopUpController : MonoBehaviour
             await UniTask.DelayFrame((int)(win.FadeTime * FRAMELATE));
             Debug.Log("入力受付開始");
             // 入力待機
-            await UniTask.WaitWhile(() => !key);
+            await UniTask.DelayFrame((int)(win.FadeTime * FRAMELATE));
         }
     }
     public async void PopUpStartStageNumberWindoController(int number)
@@ -60,7 +60,7 @@ public class PopUpController : MonoBehaviour
             await UniTask.DelayFrame((int)(win.FadeTime * FRAMELATE));
             Debug.Log("入力受付開始");
             // 入力待機
-            await UniTask.WaitWhile(() => !key);
+            await UniTask.DelayFrame((int)(win.FadeTime * FRAMELATE));
         }
     }
     private void Update()

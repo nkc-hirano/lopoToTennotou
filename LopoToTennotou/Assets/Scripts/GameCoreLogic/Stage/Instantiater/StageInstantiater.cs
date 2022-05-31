@@ -14,9 +14,13 @@ namespace GameCore
         List<string> stageDataFileNameList = new List<string>();
 
         [SerializeField]
+        GameObject floorObject;
+        [SerializeField]
         NameStageObjPair[] objPairs;
         [SerializeField]
         string stdData;
+
+        int stageSize { set; get; }
 
         static Dictionary<string, XYPOS> posDic;
 
@@ -52,10 +56,10 @@ namespace GameCore
             initializer = gameObject.AddComponent<StageDataController>();
             initializer.StageDataRegister(moveGimmickData, buttonGimmickData, otherGimmickData);
 
+            stageSize = jsonData.xLength;
             // オブジェクトの生成
             CreateObject(jsonData);
         }
-
         void CreateObject(StageDataFileFormat data)
         {
             gimmckObjMother = new GameObject("Root");
@@ -75,6 +79,9 @@ namespace GameCore
                     {
                         SpuareOptionCreate(i, j, data);
                     }
+                    float offset = (stageSize - 1) / 2;
+                    GameObject stageFloorObject = Instantiate(floorObject);
+                    stageFloorObject.transform.localPosition = new Vector3(j - offset, -1, -i + offset);
                 }
             }
         }
@@ -213,13 +220,11 @@ namespace GameCore
 
             float offset = (data.xLength - 1) / 2;
             GameObject gimmckObj = Instantiate(objPairs[(int)nuber].obj);
-            GameObject stageFloorObj = Instantiate(objPairs[objPairs.Length-1].obj);
 
             gimmckObj.name = i + "_" + j;
             posDic[gameObject.name] = new XYPOS((byte)i, (byte)j, data.xLength);
             gimmckObj.transform.eulerAngles = dir;
             gimmckObj.transform.localPosition = new Vector3(j - offset, 0, -i + offset);
-            stageFloorObj.transform.localPosition = new Vector3(j - offset, -1, -i + offset);
             gimmckObj.transform.parent = gimmckObjMother.transform;
         }
 
